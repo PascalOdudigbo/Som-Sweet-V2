@@ -7,7 +7,7 @@ import { ProductType } from '@/utils/allModelTypes';
 import { getLatestProducts } from '@/utils/productsManagement';
 import { showToast } from '@/utils/toast';
 
-function LatestTreats({isLoading, setIsLoading}: {isLoading: boolean; setIsLoading: React.Dispatch<React.SetStateAction<boolean>>}) {
+function LatestTreats({ setIsLoading }: {setIsLoading: React.Dispatch<React.SetStateAction<boolean>>}) {
     const router = useRouter();
     const [latestProducts, setLatestProducts] = useState<ProductType[]>([]);
 

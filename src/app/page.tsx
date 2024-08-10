@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <NavChildFooterLayout>
       <Welcome />
-      <LatestTreats isLoading={isLoading} setIsLoading={setIsLoading} />
+      <LatestTreats setIsLoading={setIsLoading} />
     </NavChildFooterLayout>
   );
 }
