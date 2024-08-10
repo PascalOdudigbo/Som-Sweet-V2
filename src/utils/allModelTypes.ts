@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 
-export type User = {
+export type UserType = {
   id: number;
   username: string;
   email: string;
@@ -9,22 +9,22 @@ export type User = {
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
-  role?: Role;
-  addresses?: Address[];
-  orders?: Order[];
-  reviews?: ProductReview[];
-  wishlist?: Product[];
+  role?: RoleType;
+  addresses?: AddressType[];
+  orders?: OrderType[];
+  reviews?: ProductReviewType[];
+  wishlist?: ProductType[];
   stripeCustomerId?: string | null;
-  cart?: Cart | null;
+  cart?: CartType | null;
 }
 
-export type Role = {
+export type RoleType = {
   id: number;
   name: string;
-  users?: User[];
+  users?: UserType[];
 }
 
-export type Address = {
+export type AddressType = {
   id: number;
   userId: number;
   addressLine1: string;
@@ -35,21 +35,21 @@ export type Address = {
   country: string;
   createdAt: Date;
   updatedAt: Date;
-  user?: User;
-  orders?: Order[];
+  user?: UserType;
+  orders?: OrderType[];
 }
 
-export type Category = {
+export type CategoryType = {
   id: number;
   name: string;
   image: string;
   imagePublicId: string;
   createdAt: Date;
   updatedAt: Date;
-  products?: Product[];
+  products?: ProductType[];
 }
 
-export type Product = {
+export type ProductType = {
   id: number;
   name: string;
   description?: string | null;
@@ -58,38 +58,38 @@ export type Product = {
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
-  category?: Category;
-  variations?: ProductVariation[];
-  images?: ProductImage[];
-  reviews?: ProductReview[];
-  orderItems?: OrderItem[];
-  discounts?: DiscountProduct[];
-  cartItems?: CartItem[];
-  wishlistedBy?: User[];
+  category?: CategoryType;
+  variations?: ProductVariationType[];
+  images?: ProductImageType[];
+  reviews?: ProductReviewType[];
+  orderItems?: OrderItemType[];
+  discounts?: DiscountProductType[];
+  cartItems?: CartItemType[];
+  wishlistedBy?: UserType[];
 }
 
-export type ProductVariation = {
+export type ProductVariationType = {
   id: number;
   productId: number;
   name: string;
   price: number;
   createdAt: Date;
   updatedAt: Date;
-  product?: Product;
-  cartItems?: CartItem[];
-  orderItems?: OrderItem[];
+  product?: ProductType;
+  cartItems?: CartItemType[];
+  orderItems?: OrderItemType[];
 }
 
-export type ProductImage = {
+export type ProductImageType = {
   id: number;
   productId: number;
   imageUrl: string | StaticImageData;
   imagePublicId: string;
   createdAt: Date;
-  product?: Product;
+  product?: ProductType;
 }
 
-export type Discount = {
+export type DiscountType = {
   id: number;
   name: string;
   description?: string | null;
@@ -100,17 +100,17 @@ export type Discount = {
   imagePublicId?: string | null;
   createdAt: Date;
   updatedAt: Date;
-  products?: DiscountProduct[];
+  products?: DiscountProductType[];
 }
 
-export type DiscountProduct = {
+export type DiscountProductType = {
   productId: number;
   discountId: number;
-  product?: Product;
-  discount?: Discount;
+  product?: ProductType;
+  discount?: DiscountType;
 }
 
-export type ProductReview = {
+export type ProductReviewType = {
   id: number;
   productId: number;
   userId: number;
@@ -118,32 +118,32 @@ export type ProductReview = {
   review?: string | null;
   createdAt: Date;
   updatedAt: Date;
-  product?: Product;
-  user?: User;
+  product?: ProductType;
+  user?: UserType;
 }
 
-export type Cart = {
+export type CartType = {
   id: number;
   userId: number;
   createdAt: Date;
   updatedAt: Date;
-  user: User;
-  items: CartItem[];
+  user: UserType;
+  items: CartItemType[];
 }
 
-export type CartItem = {
+export type CartItemType = {
   id: number;
   cartId: number;
   productId: number;
   variationId?: number | null;
   quantity: number;
   customText?: string | null;
-  cart?: Cart;
-  product: Product;
-  variation?: ProductVariation | null;
+  cart?: CartType;
+  product: ProductType;
+  variation?: ProductVariationType | null;
 }
 
-export type Order = {
+export type OrderType = {
   id: number;
   userId: number;
   total: number;
@@ -151,14 +151,14 @@ export type Order = {
   shippingAddressId: number;
   createdAt: Date;
   updatedAt: Date;
-  user?: User;
-  shippingAddress?: Address;
-  orderItems?: OrderItem[];
-  payment?: Payment | null;
-  refunds?: Refund[];
+  user?: UserType;
+  shippingAddress?: AddressType;
+  orderItems?: OrderItemType[];
+  payment?: PaymentType | null;
+  refunds?: RefundType[];
 }
 
-export type OrderItem = {
+export type OrderItemType = {
   id: number;
   orderId: number;
   productId: number;
@@ -168,12 +168,12 @@ export type OrderItem = {
   customText?: string | null;
   createdAt: Date;
   updatedAt: Date;
-  order?: Order;
-  product?: Product;
-  variation?: ProductVariation | null;
+  order?: OrderType;
+  product?: ProductType;
+  variation?: ProductVariationType | null;
 }
 
-export type Payment = {
+export type PaymentType = {
   id: number;
   orderId: number;
   stripePaymentId: string;
@@ -184,10 +184,10 @@ export type Payment = {
   paymentMethod: string;
   createdAt: Date;
   updatedAt: Date;
-  order?: Order;
+  order?: OrderType;
 }
 
-export type Business = {
+export type BusinessType = {
   id: number;
   name: string;
   description?: string | null;
@@ -195,26 +195,26 @@ export type Business = {
   phone: string;
   email: string;
   address: string;
-  socialLinks?: SocialMedia[];
-  policies?: Policy[];
+  socialLinks?: SocialMediaType[];
+  policies?: PolicyType[];
 }
 
-export type SocialMedia = {
+export type SocialMediaType = {
   id: number;
   businessId: number;
   name: string;
   url: string;
-  business?: Business;
+  business?: BusinessType;
 }
 
-export type Policy = {
+export type PolicyType = {
   id: number;
   businessId: number;
   name: string;
-  business?: Business;
+  business?: BusinessType;
 }
 
-export type Refund = {
+export type RefundType = {
   id: number;
   orderId: number;
   amount: number;
@@ -225,5 +225,5 @@ export type Refund = {
   updatedAt: Date;
   approvedBy?: number | null;
   approvedAt?: Date | null;
-  order?: Order;
+  order?: OrderType;
 }

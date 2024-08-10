@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { User } from '@/utils/allModelTypes';
+import { UserType } from '@/utils/allModelTypes';
 import { parseJwt } from '@/utils/userManagement';
 import { useRouter } from 'next/navigation';
 
 export function useAuth() {
   // Initializing state variables for use data and its data loading
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
   // Declaring the router variable function
   const router = useRouter()

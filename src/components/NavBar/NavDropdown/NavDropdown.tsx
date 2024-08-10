@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { profileIcon, upIcon } from "../../../assets";
 import "./_navDropdown.scss";
 import Link from 'next/link';
-import { User } from '@/utils/allModelTypes';
+import { UserType } from '@/utils/allModelTypes';
 import { useAuth } from '@/hooks/useAuth';
 
 // Defining the DropdownItem prop
@@ -15,7 +15,7 @@ type DropdownItemProps = {
 
 // Defining the NavDropdown prop type
 type DropdownProps = {
-  user: User | null;
+  user: UserType | null;
 }
 
 const NavDropdown: FC<DropdownProps> = ({user}) => {

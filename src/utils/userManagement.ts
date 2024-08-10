@@ -1,7 +1,7 @@
-import { User } from './allModelTypes';
+import { UserType } from './allModelTypes';
 
 // A function to sign users up 
-export async function signUp(userData: { username: string; email: string; password: string }): Promise<User> {
+export async function signUp(userData: { username: string; email: string; password: string }): Promise<UserType> {
     try {
       const response = await fetch('/api/users/signup', {
         method: 'POST',
@@ -22,7 +22,7 @@ export async function signUp(userData: { username: string; email: string; passwo
   }
   
 
-export async function getUserProfile(): Promise<User> {
+export async function getUserProfile(): Promise<UserType> {
   try {
     const response = await fetch('/api/users/profile');
     if (!response.ok) {

@@ -1,13 +1,13 @@
 'use client'
 import React, { createContext, useContext } from 'react';
-import { User } from '@/utils/allModelTypes';
+import { UserType } from '@/utils/allModelTypes';
 import { useAuth as useAuthHook } from '@/hooks/useAuth'; // Import the existing useAuth hook
 
 // DEfining the auth context types
 interface AuthContextType {
-  user: User | null;
+  user: UserType | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<User>;
+  login: (email: string, password: string) => Promise<UserType>;
   logout: () => void;
 }
 
