@@ -1,8 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    // Defining acceptable image URL details for the project
     images: {
-      domains: ['images.pexels.com', 'images.unsplash.com', 'res.cloudinary.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'images.pexels.com',
+                pathname: '**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
+                pathname: '**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+                pathname: '**'
+            }
+        ]
     },
 };
 

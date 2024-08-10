@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Image from 'next/image'
 import { breadBg, brownieBg, cakeBg, donutsBg } from '../assets'
 import Link from 'next/link';
@@ -15,6 +15,11 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   // Getting the loading state from the context
   const {loading} = useAuth()
+  // Memoize the setIsLoading function
+  const memoizedSetIsLoading = useCallback((value: boolean) => {
+    setIsLoading(value);
+  }, []);
+
 
 
   // Creating the home sub-page
@@ -49,14 +54,14 @@ export default function Home() {
     )
   }
 
-  if (loading || isLoading) {
+  if (loading && isLoading) {
     return <Loading />
   }
 
   return (
     <NavChildFooterLayout>
       <Welcome />
-      <LatestTreats setIsLoading={setIsLoading} />
+      <LatestTreats setIsLoading={memoizedSetIsLoading} />
       <AboutUs/>
       <ContactUs/>
     </NavChildFooterLayout>

@@ -170,9 +170,9 @@ export async function getRecommendedProducts(productId: number): Promise<Product
 }
 
 // A function to get the latest products
-export async function getLatestProducts(limit: number = 4): Promise<ProductType[]> {
+export async function getLatestProducts(): Promise<ProductType[]> {
   try {
-    const response = await fetch(`/api/products/latest?limit=${limit}`, {
+    const response = await fetch(`/api/products/latest`, {
       next: { revalidate: 3600 } // Cache for 1 hour
     });
     if (!response.ok) {

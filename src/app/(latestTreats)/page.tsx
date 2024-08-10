@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import "./_latestTreats.scss"
-import { Loading, Product } from '@/components';
+import { Product } from '@/components';
 import { useRouter } from 'next/navigation';
 import { ProductType } from '@/utils/allModelTypes';
 import { getLatestProducts } from '@/utils/productsManagement';
 import { showToast } from '@/utils/toast';
 
-function LatestTreats({ setIsLoading }: {setIsLoading: React.Dispatch<React.SetStateAction<boolean>>}) {
+function LatestTreats({ setIsLoading }: {setIsLoading: (value: boolean) => void}) {
     const router = useRouter();
     const [latestProducts, setLatestProducts] = useState<ProductType[]>([]);
 
@@ -15,7 +15,7 @@ function LatestTreats({ setIsLoading }: {setIsLoading: React.Dispatch<React.SetS
         const fetchLatestProducts = async () => {
             setIsLoading(true);
             try {
-                const products = await getLatestProducts(4); // Fetch 4 latest products
+                const products = await getLatestProducts(); // Fetch 6 latest products
                 setLatestProducts(products);
             } catch (error) {
                 console.error('Failed to fetch latest products:', error);

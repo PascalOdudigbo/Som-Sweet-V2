@@ -1,11 +1,9 @@
-// /api/products/latest/
 import { NextResponse } from 'next/server';
 import db from '@/db/db';
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get('limit') || '4', 10);
+    const limit = 6; // Set a default limit
 
     const latestProducts = await db.product.findMany({
       where: { active: true },

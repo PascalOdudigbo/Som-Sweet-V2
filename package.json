@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "PORT=4000 next dev && sass --watch --update --style=expanded styles/scss:styles/css",
     "postinstall": "prisma generate",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
