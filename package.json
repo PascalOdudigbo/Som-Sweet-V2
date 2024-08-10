@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "PORT=4000 next dev && sass --watch --update --style=expanded styles/scss:styles/css",
-    "build": "next build",
+    "postinstall": "prisma generate",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },

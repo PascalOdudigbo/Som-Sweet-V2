@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { Loading, NavChildFooterLayout } from '@/components';
 import LatestTreats from './(latestTreats)/page';
 import { useAuth } from '@/components/contexts/AuthProvider';
+import AboutUs from './aboutus/page';
+import ContactUs from './contactus/page';
 
 export default function Home() {
   // Defining state variables for managing loading
@@ -55,6 +57,8 @@ export default function Home() {
     <NavChildFooterLayout>
       <Welcome />
       <LatestTreats setIsLoading={setIsLoading} />
+      <AboutUs/>
+      <ContactUs/>
     </NavChildFooterLayout>
   );
 }
