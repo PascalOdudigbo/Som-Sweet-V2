@@ -9,6 +9,7 @@ import LatestTreats from './(latestTreats)/page';
 import { useAuth } from '@/components/contexts/AuthProvider';
 import AboutUs from './aboutus/page';
 import ContactUs from './contactus/page';
+import '@/styles/_welcome.scss'
 
 export default function Home() {
   // Defining state variables for managing loading

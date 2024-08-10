@@ -36,7 +36,6 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
   const navLinks = [
     { name: 'Sign In', href: '/signin' },
     { name: 'Sign Up', href: `/signup` },
-    { name: 'Logout', href: '/' }
   ];
 
   // Getting the logout function from the useAuth hook
@@ -75,7 +74,6 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
               ? <DropdownItem key={index} text={link.name} path={link.href} />
               : <DropdownLogoutItem key={index} text={link.name} path={link.href} onClick={()=>{logout()}}/>
           )}
-          {user?.id && <DropdownLogoutItem text="Log Out" onClick={()=>{logout()}}/>}
         </section>
       </section>
     </div>

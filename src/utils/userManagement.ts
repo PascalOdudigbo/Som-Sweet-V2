@@ -43,3 +43,26 @@ export const parseJwt = (token: string) => {
     return null;
   }
 };
+
+// A function to handle user account recovery
+export const accountrecovery = async (email: string, setUser: React.Dispatch<React.SetStateAction<UserType | null>>) => {
+  try {
+    const response = await fetch('/api/users/account-recovery', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email}),
+    });
+    if (response.ok) {
+      // If the account was found successfully
+      const { user } = await response.json();
+      setUser(user);
+      return user;
+    } else {
+      // If the account recovery was unsuccessful
+      throw new Error('Account recovery failed');
+    }
+  } catch (error) {
+    console.error('Account recovery error:', error);
+    throw error;
+  }
+};
