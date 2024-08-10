@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
-import { breadBg, brownieBg, cakeBg, donutsBg } from '../../public/assets'
+import { breadBg, brownieBg, cakeBg, donutsBg } from '../assets'
 import Link from 'next/link';
 
 import { NavChildFooterLayout } from '@/components';

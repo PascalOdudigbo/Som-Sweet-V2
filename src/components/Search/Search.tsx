@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import {searchIcon} from "../../../public/assets"
+import {searchIcon} from "../../assets"
 import "./_search.scss"
 
 function Search({onSearch}:{onSearch?: (term: string) => void}) {

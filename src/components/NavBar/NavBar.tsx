@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { NavDropdown, Search } from '../'
 import "./_navbar.scss"
 import Image from 'next/image'
-import { cartIcon } from "../../../public/assets";
+import { cartIcon } from "../../assets";
 import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation'

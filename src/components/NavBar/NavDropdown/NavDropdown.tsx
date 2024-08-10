@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { FC } from 'react'
-import { profileIcon, upIcon } from "../../../../public/assets";
+import { profileIcon, upIcon } from "../../../assets";
 import "./_navDropdown.scss";
 import Link from 'next/link';
 import { User } from '@/utils/allModelTypes';
