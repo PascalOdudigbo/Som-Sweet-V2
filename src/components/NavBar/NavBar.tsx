@@ -67,7 +67,7 @@ function NavBar() {
         <h3 className='nav_site_title' onClick={() => { router.push("/") }}>{"Som' Sweet"}</h3>
 
         <section className='search_container'>
-          <Search />
+          {/* <Search /> */}
           <section className='search_content'>
 
           </section>
@@ -128,7 +128,7 @@ function NavBar() {
 
       <section className={`nav_mobile_links ${mobileMenuOpen ? 'active' : ''}`}>
         <section className='search_container'>
-          <Search />
+          {/* <Search/> */}
           <section className='search_content'>
 
           </section>
