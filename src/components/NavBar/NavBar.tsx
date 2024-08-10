@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Loading, NavDropdown, Search } from '../'
+import { NavDropdown, Search } from '../'
 import "./_navbar.scss"
 import Image from 'next/image'
 import { cartIcon } from "../../../public/assets";
@@ -9,13 +9,14 @@ import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 
+// Defining the NavLinks
 const navLinks = [
   { name: 'HOME', href: '/' },
   { name: 'STORE', href: '/store' },
   { name: 'ABOUT US', href: '/#aboutus' },
   { name: 'CONTACT US', href: '/#contactus' },
 ];
-
+// Defining Temporary Socials Links
 const socialLinks = [
   { name: 'INSTAGRAM', href: '/instagram' },
   { name: 'FACEBOOK', href: '/facebook' },
@@ -67,7 +68,7 @@ function NavBar() {
         <h3 className='nav_site_title' onClick={() => { router.push("/") }}>{"Som' Sweet"}</h3>
 
         <section className='search_container'>
-          {/* <Search /> */}
+          <Search />
           <section className='search_content'>
 
           </section>
@@ -128,7 +129,7 @@ function NavBar() {
 
       <section className={`nav_mobile_links ${mobileMenuOpen ? 'active' : ''}`}>
         <section className='search_container'>
-          {/* <Search/> */}
+          <Search/>
           <section className='search_content'>
 
           </section>
