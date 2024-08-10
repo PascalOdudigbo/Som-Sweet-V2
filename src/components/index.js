@@ -1,6 +1,7 @@
 // Components
 export {default as NavBar} from "./NavBar/NavBar";
 export {default as Footer} from "./Footer/Footer";
+export {default as Providers} from "./Providers/Providers";
 export {default as Search} from "./Search/Search";
 export {default as NavDropdown} from "./NavBar/NavDropdown/NavDropdown";
 export {default as FormInput} from "./FormInput/FormInput";
@@ -8,7 +9,7 @@ export {default as TextArea} from "./TextArea/TextArea";
 export {default as Product} from "./Product/Product";
 export {default as Category} from "./Category/Category";
 export {default as CustomRating} from "./CustomRating/CustomRating";
-export {default as MinimizableLayout} from "./layouts/MinimizableLayout/MinimizableLayout";
+export {default as MinimizableLayout} from "./Layouts/MinimizableLayout/MinimizableLayout";
 export {default as Recommendations} from "./Recommendations/Recommendations";
 export {default as FormInputWithIcon} from "./FormInputWithIcon/FormInputWithIcon";
 export {default as ProductRow} from "./ProductRow/ProductRow";
@@ -29,4 +30,4 @@ export {default as OrderStatusDropdown} from "./OrderStatusDropdown/OrderStatusD
 export { default as Pagination } from './Pagination/Pagination';
 
 //Layouts
-export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";
+export {default as NavChildFooterLayout} from "./Layouts/NavChildrenFooterLayout";
