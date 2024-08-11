@@ -35,7 +35,7 @@ function LatestTreats({ setIsLoading }: {setIsLoading: (value: boolean) => void}
 
             <section className='products_container'>
                 {latestProducts.map(product => (
-                    <Product
+                    product.active && <Product
                         key={product.id}
                         product={product}
                     />

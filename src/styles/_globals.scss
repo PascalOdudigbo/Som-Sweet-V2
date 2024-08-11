@@ -266,7 +266,7 @@ a {
 
 .form_title {
     font-family: var(--font-questrial);
-    font-size: 45px;
+    font-size: clamp(30px, 4vw, 40px);
     font-style: normal;
     font-weight: 600;
     line-height: 26px;
