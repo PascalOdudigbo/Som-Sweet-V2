@@ -13,6 +13,7 @@ export {default as Checkbox} from "./CheckBox/CheckBox";
 export {default as DropdownCheckbox} from "./DropdownCheckbox/DropdownCheckbox";
 export {default as Loading} from "./Loading/Loading";
 export {default as Product} from "./Product/Product";
+export {default as LatestTreats} from "./LatestTreats/LatestTreats"
 
 
 // export {default as StaffRow} from "./StaffRow/StaffRow";

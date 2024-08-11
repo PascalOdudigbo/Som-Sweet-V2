@@ -56,7 +56,7 @@ function ForgotPassword() {
       user.role?.name.toLowerCase() === "customer" && router.push("/store");
       user.role?.name.toLowerCase() === "administrator" && router.push("/admin/dashboard/")
     }
-  }, [user]);
+  }, [user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

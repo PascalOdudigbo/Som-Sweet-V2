@@ -4,8 +4,7 @@ import Image from 'next/image'
 import { breadBg, brownieBg, cakeBg, donutsBg } from '../assets'
 import Link from 'next/link';
 
-import { Loading, NavChildFooterLayout } from '@/components';
-import LatestTreats from './(latestTreats)/page';
+import { Loading, NavChildFooterLayout, LatestTreats } from '@/components';
 import { useAuth } from '@/components/contexts/AuthProvider';
 import AboutUs from './aboutus/page';
 import ContactUs from './contactus/page';

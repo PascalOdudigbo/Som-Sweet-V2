@@ -26,7 +26,7 @@ function LatestTreats({ setIsLoading }: {setIsLoading: (value: boolean) => void}
         };
 
         fetchLatestProducts();
-    }, []);
+    }, [setIsLoading]);
 
     return (
         <main className='latestTreats_main_container'>
