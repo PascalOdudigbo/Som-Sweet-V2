@@ -37,7 +37,8 @@ function FormInputWithIcon({ label, required, iconSrc, type, readOnly, hint, aut
                     alt={`${label} icon`}
                     height={25}
                     width={25}
-                />                <input className='input_textbox' type={type} readOnly={readOnly} placeholder={hint} value={value} onChange={handleChange} autoComplete={autoComplete} />
+                />                
+                <input className='input_textbox' type={type} readOnly={readOnly} placeholder={hint} value={value} onChange={handleChange} autoComplete={autoComplete} required={required}/>
             </div>
 
         </main>

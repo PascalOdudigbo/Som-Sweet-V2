@@ -48,8 +48,6 @@ function ForgotPassword() {
   const router = useRouter();
   // Use the login function from the auth context
   const { user } = useAuth();
-  // Defining the recovered account states
-  const [recoveredData, setRecoveredData] = useState<UserType | null>(null)
 
   useEffect(() => {
     setMounted(true);
@@ -66,13 +64,13 @@ function ForgotPassword() {
 
     try {
       // Using the account recovery function
-      const user = await accountrecovery(email, setRecoveredData);
+      const user = await accountrecovery(email);
       if (user) {
         showToast('info', 'User data found!');
         const emailDetails: EmailDetails = {
           emailTitle: `Som' Sweet: Account Recovery`,
           username: user.username,
-          emailTo: email,
+          emailTo: user.email,
           notice: `This email was intended for ${user.username}, if you're not the intended recipient please disregerd or delete it`,
           emailBody: `Hello ${user.username.split(" ")[0]},
 
@@ -88,7 +86,7 @@ function ForgotPassword() {
           
           Best regards,
           The Som' Sweet Team`,
-          buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/forgot-password`,
+          buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password/${user.id}/${Date.now()}`,
           buttonText: "Reset Password"
         }
         await sendEmail(emailDetails, "success", "Recovery email sent!")

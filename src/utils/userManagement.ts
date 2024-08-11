@@ -45,7 +45,7 @@ export const parseJwt = (token: string) => {
 };
 
 // A function to handle user account recovery
-export const accountrecovery = async (email: string, setUser: React.Dispatch<React.SetStateAction<UserType | null>>) => {
+export const accountrecovery = async (email: string) => {
   try {
     const response = await fetch('/api/users/account-recovery', {
       method: 'POST',
@@ -55,7 +55,6 @@ export const accountrecovery = async (email: string, setUser: React.Dispatch<Rea
     if (response.ok) {
       // If the account was found successfully
       const { user } = await response.json();
-      setUser(user);
       return user;
     } else {
       // If the account recovery was unsuccessful
@@ -66,3 +65,27 @@ export const accountrecovery = async (email: string, setUser: React.Dispatch<Rea
     throw error;
   }
 };
+
+// A function to reset password 
+export const resetPassword = async (userData: { id: number; password: string }) => {
+  try {
+    const response = await fetch(`/api/users/${userData.id}/reset-password`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+    // If the password reset succeeds
+    if (response.ok) {
+      // Getting the updated user from the response
+      const { updatedUser } = await response.json();
+      console.log(updatedUser) 
+      return updatedUser;
+    } else {
+      // If the account recovery was unsuccessful
+      throw new Error('Account recovery failed');
+    }
+  } catch (error) {
+    console.error('Error in resetPassword:', error);
+    throw error;
+  }
+}
