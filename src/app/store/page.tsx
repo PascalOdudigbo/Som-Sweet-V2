@@ -36,6 +36,7 @@ function Store() {
         setFilteredProducts(fetchedProducts);
         setCategories(fetchedCategories);
         setDiscounts(fetchedDiscounts);
+        console.log(fetchedDiscounts)
         // If offers exist then display the first one
         if (fetchedDiscounts.length > 0) {
           setTargetDiscount(fetchedDiscounts[0]);
@@ -51,21 +52,6 @@ function Store() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    // If there are no offers then return
-    if (discounts.length === 0) return;
-
-    // Setting up discounts display interval
-    const intervalId = setInterval(() => {
-      setTargetDiscount(targetDiscount => {
-        const currentIndex = discounts.indexOf(targetDiscount!);
-        const nextIndex = (currentIndex + 1) % discounts.length;
-        return discounts[nextIndex];
-      });
-    }, 6000);
-
-    return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, [discounts]);
 
   useEffect(() => {
     // Handling product search through util function
@@ -99,7 +85,7 @@ function Store() {
   return (
     <NavChildFooterLayout>
       <main className='shop_main_container page_container flex_column_center'>
-        {discounts.length > 0 && <section className='shop_offers_container flex_column'>
+        { <section className='shop_offers_container flex_column'>
           <h1 className='section_title'>OFFERS</h1>
           {
             <EmblaCarouselDiscounts discounts={discounts}/>

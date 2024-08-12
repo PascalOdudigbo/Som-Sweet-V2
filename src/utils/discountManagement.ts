@@ -186,3 +186,37 @@ export function searchDiscounts(searchTerm: string, discounts: DiscountType[]): 
     );
   }
 }
+
+
+// A function to validate a discount 
+export function isDiscountValid(discount: DiscountType) {
+  // Get the current date
+  const currentDate = new Date();
+
+  // Parse the discount dates
+  const validFrom = new Date(discount.validFrom);
+  const validUntil = new Date(discount.validUntil);
+
+  // Check if the current date is within the valid range
+  return currentDate <= validUntil;
+}
+
+// A function to validate if a discount is active
+export function discountStatus(discount: DiscountType) {
+  // Get the current date
+  const currentDate = new Date();
+
+// Parse the discount dates
+const validFrom = new Date(discount.validFrom);
+const validUntil = new Date(discount.validUntil);
+
+if (currentDate >= validFrom && currentDate <= validUntil){
+  return "Active"
+}
+else if (currentDate < validFrom && currentDate < validUntil){
+  return "Future"
+}
+else{
+  return "Expired"
+}
+}

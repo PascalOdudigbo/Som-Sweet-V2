@@ -1,26 +1,38 @@
 .embla {
-  overflow: hidden;
+  height: fit-content;
+  width: 100%;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height: fit-content;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
 }
 
 .embla__container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.embla__slide {
+  flex: 0 0 auto; /* Adapt slide size to its content */
+  min-width: 100%;
+  max-width: 100%; /* Prevent from growing larger than viewport */
 
   .image_title_button_container {
     width: 100%;
     align-items: flex-start;
-    height: 100%;
+    height: auto;
     max-height: 420px;
+    aspect-ratio: 16 / 9;
+    position: relative;
 
     .offer_name {
+      position: absolute;
+      top: 20px;
+      left: 20px;
       font-size: clamp(24px, 5vw, 40px);
       z-index: 2;
-      margin-bottom: -60px;
-      margin-left: 20px;
     }
 
     .offer_image {
@@ -33,31 +45,36 @@
     }
 
     .shop_offers_button {
-      // z-index: 2;
       position: absolute;
-      margin-top: 15%;
-      margin-left: 20px;
+      bottom: 20px;
+      left: 20px;
+      z-index: 2;
     }
   }
 }
 
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
-}
+/* Media Queries */
+@media screen and (max-width: 480px) {
+  .image_title_button_container {
 
-
-@media screen and (max-width: 767px) {
-  .shop_main_container {
-    .shop_offers_container {
-      width: 95%;
-
-      .shop_offers_button {
-        margin-top: 28%;
-    }
+    .shop_offers_button {
+      font-size: 11px;
+      padding: 6px 8px;
     }
   }
 }
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .image_title_button_container {
+
+    .shop_offers_button {
+      font-size: 12px;
+      padding: 8px 12px;
+    }
+  }
+}
+
+
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {}
 
