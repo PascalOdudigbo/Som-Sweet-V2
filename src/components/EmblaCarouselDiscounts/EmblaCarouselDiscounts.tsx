@@ -20,7 +20,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {discounts.map((discount) => (
-            <div className='embla__slide image_title_button_container flex_column_center'>
+            <div className='embla__slide image_title_button_container flex_column_center' key={discount.id}>
               <h1 className='offer_name playfair_shadow_title'>{discount.name}</h1>
               <Image className='offer_image' src={discount.imageUrl ?? ""} alt={discount.name} title={discount.description ?? ""} height={400} width={1024} />
               <button className='shop_offers_button border_button'>SHOP NOW</button>
