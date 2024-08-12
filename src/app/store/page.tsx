@@ -1,5 +1,5 @@
 'use client'
-import { Loading, NavChildFooterLayout, Product, Search } from '@/components'
+import { EmblaCarouselDiscounts, Loading, NavChildFooterLayout, Product, Search } from '@/components'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import "./_store.scss"
@@ -52,8 +52,10 @@ function Store() {
   }, []);
 
   useEffect(() => {
+    // If there are no offers then return
     if (discounts.length === 0) return;
 
+    // Setting up discounts display interval
     const intervalId = setInterval(() => {
       setTargetDiscount(targetDiscount => {
         const currentIndex = discounts.indexOf(targetDiscount!);
@@ -99,13 +101,9 @@ function Store() {
       <main className='shop_main_container page_container flex_column_center'>
         {discounts.length > 0 && <section className='shop_offers_container flex_column'>
           <h1 className='section_title'>OFFERS</h1>
-          {targetDiscount && (
-            <div className='image_title_button_container flex_column_center'>
-              <h1 className='offer_name playfair_shadow_title'>{targetDiscount.name}</h1>
-              <Image className='offer_image' src={targetDiscount.imageUrl ?? ""} alt={targetDiscount.name} title={targetDiscount.description ?? ""} height={400} width={1024} />
-              <button className='shop_offers_button border_button'>SHOP NOW</button>
-            </div>
-          )}
+          {
+            <EmblaCarouselDiscounts discounts={discounts}/>
+          }
         </section>}
 
         <section className='shop_categories_container flex_column_center'>

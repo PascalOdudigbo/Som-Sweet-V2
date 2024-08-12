@@ -1,0 +1,64 @@
+.embla {
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: fit-content;
+}
+
+.embla__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .image_title_button_container {
+    width: 100%;
+    align-items: flex-start;
+    height: 100%;
+    max-height: 420px;
+
+    .offer_name {
+      font-size: clamp(24px, 5vw, 40px);
+      z-index: 2;
+      margin-bottom: -60px;
+      margin-left: 20px;
+    }
+
+    .offer_image {
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .shop_offers_button {
+      // z-index: 2;
+      position: absolute;
+      margin-top: 15%;
+      margin-left: 20px;
+    }
+  }
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+
+@media screen and (max-width: 767px) {
+  .shop_main_container {
+    .shop_offers_container {
+      width: 95%;
+
+      .shop_offers_button {
+        margin-top: 28%;
+    }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {}
+
+@media screen and (min-width: 1024px) {}

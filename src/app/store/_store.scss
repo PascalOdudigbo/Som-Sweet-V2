@@ -4,37 +4,7 @@
         height: max-content;
         margin-top: 40px;
         margin-bottom: 40px;
-
-        .image_title_button_container {
-            width: 100%;
-            align-items: flex-start;
-            height: auto;
-            max-height: 420px;
-            margin-top: 20px;
-
-            .offer_name {
-                font-size: clamp(24px, 5vw, 40px);
-                z-index: 2;
-                margin-bottom: -60px;
-                margin-left: 20px;
-            }
-
-            .offer_image {
-                width: 100%;
-                height: auto;
-                max-height: 420px;
-                aspect-ratio: 16 / 9;
-                object-fit: cover;
-                border-radius: 15px;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            }
-
-            .shop_offers_button {
-                z-index: 2;
-                margin-top: -60px;
-                margin-left: 20px;
-            }
-        }
+ 
     }
 
     .shop_categories_container,
@@ -86,7 +56,6 @@
 
 @media screen and (max-width: 767px) {
     .shop_main_container {
-        .shop_offers_container,
         .shop_categories_container,
         .shop_products_container {
             width: 95%;

@@ -14,6 +14,7 @@ export {default as DropdownCheckbox} from "./DropdownCheckbox/DropdownCheckbox";
 export {default as Loading} from "./Loading/Loading";
 export {default as Product} from "./Product/Product";
 export {default as LatestTreats} from "./LatestTreats/LatestTreats"
+export {default as EmblaCarouselDiscounts} from "./EmblaCarouselDiscounts/EmblaCarouselDiscounts"
 
 
 // export {default as StaffRow} from "./StaffRow/StaffRow";
