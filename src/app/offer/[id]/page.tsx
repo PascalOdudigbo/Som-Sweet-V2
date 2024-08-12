@@ -6,6 +6,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { DiscountProductType, DiscountType } from '@/utils/allModelTypes';
 import { showToast } from '@/utils/toast';
 import { getDiscountById } from '@/utils/discountManagement';
+import Image from 'next/image';
 
 function Offer() {
     // Declaring the router for navigation
@@ -34,7 +35,7 @@ function Offer() {
         };
 
         fetchLatestProducts();
-    }, [setIsLoading]);
+    }, [id, setIsLoading]);
 
     if (isLoading) {
         return <Loading />
@@ -47,7 +48,7 @@ function Offer() {
     return (
         <NavChildFooterLayout>
             <main className='offer_main_container'>
-                <img className='offer_image' src={discount.imageUrl?.toString() ?? ""} alt={discount.name} title={discount.description ?? ""} />
+                <Image className='offer_image' src={discount.imageUrl?.toString() ?? ""} alt={discount.name} title={discount.description ?? ""} height={450} width={1200} quality={100}/>
 
                 <h2 className='offer_page_title'>{discount?.name?.toUpperCase()}</h2>
                 <p className='offer_page_text discount_duration'>{discount && new Date(discount?.validFrom).toLocaleDateString()} - {discount && new Date(discount?.validUntil).toLocaleDateString()}</p>
@@ -56,7 +57,7 @@ function Offer() {
                 <div className='flex_row_center'>
                         <h1 className='section_title'>TREATS ON OFFER</h1>
                 </div>
-                
+
                 <section className='products_container'>
                     {discountProducts?.map(discountProduct => (
                         discountProduct?.product?.active && <Product
