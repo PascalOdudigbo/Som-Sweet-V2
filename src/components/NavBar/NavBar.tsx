@@ -8,6 +8,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '../contexts/AuthProvider'
+import { useCart } from '../contexts/CartProvider'
 
 
 // Defining the NavLinks
@@ -32,6 +33,7 @@ function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // getting the user data from the useAuth hook
   const {user} = useAuth()
+  const {cart} = useCart()
 
   // Router variable function
   const router = useRouter();
@@ -42,7 +44,7 @@ function NavBar() {
     window.addEventListener('hashchange', handleHashChange);
     setCurrentHash(window.location.hash);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [user, cart]);
 
   const isLinkActive = (href: string) => {
     // If the window is undefined return false
@@ -80,7 +82,7 @@ function NavBar() {
           <NavDropdown user={user} />
 
           <section className='nav_badge_cart_container' onClick={() => { router.push("/cart") }}>
-            <p className='nav_badge'>{user?.cart?.items?.length ?? 0}</p>
+            <p className='nav_badge'>{cart?.items?.length ?? 0}</p>
             <Image src={cartIcon} alt='cart icon' height={24} width={24} title='Cart' />
           </section>
 

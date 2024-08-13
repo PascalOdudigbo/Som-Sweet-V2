@@ -1,16 +1,21 @@
 'use client';
 
 import { AuthProvider } from "../contexts/AuthProvider";
+import { CartProvider } from "../contexts/CartProvider";
 import ToastProvider from "../ToastProvider/ToastProvider";
 
 interface ProvidersProps {
-    children: React.ReactNode;
-  }
-  
-function Providers({ children } : ProvidersProps) {
+  children: React.ReactNode;
+}
+
+function Providers({ children }: ProvidersProps) {
   return (
     <AuthProvider>
-      <ToastProvider>{children}</ToastProvider>
+      <CartProvider>
+        <ToastProvider>
+          {children}
+        </ToastProvider>
+      </CartProvider>
     </AuthProvider>
   );
 }
