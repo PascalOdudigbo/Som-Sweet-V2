@@ -7,7 +7,8 @@ import { cartIcon } from "../../assets";
 import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '../contexts/AuthProvider'
+
 
 // Defining the NavLinks
 const navLinks = [

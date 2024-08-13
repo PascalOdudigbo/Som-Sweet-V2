@@ -15,6 +15,9 @@ export {default as Loading} from "./Loading/Loading";
 export {default as Product} from "./Product/Product";
 export {default as LatestTreats} from "./LatestTreats/LatestTreats"
 export {default as EmblaCarouselDiscounts} from "./EmblaCarouselDiscounts/EmblaCarouselDiscounts"
+export {default as MinimizableLayout} from "./Layouts/MinimizableLayout/MinimizableLayout";
+export {default as Recommendations} from "./Recommendations/Recommendations";
+export {default as CustomRating} from "./CustomRating/CustomRating";
 
 
 // export {default as StaffRow} from "./StaffRow/StaffRow";
@@ -25,9 +28,7 @@ export {default as EmblaCarouselDiscounts} from "./EmblaCarouselDiscounts/EmblaC
 // export {default as OfferRow} from "./OfferRow/OfferRow";
 // export {default as OfferProductsRow} from "./OfferProductsRow/OfferProductsRow";
 // export {default as Category} from "./Category/Category";
-// export {default as CustomRating} from "./CustomRating/CustomRating";
-// export {default as MinimizableLayout} from "./Layouts/MinimizableLayout/MinimizableLayout";
-// export {default as Recommendations} from "./Recommendations/Recommendations";
+
 // export {default as CartItem} from "./CartItem/CartItem";
 // export {default as OrderRow} from "./OrderRow/OrderRow";
 // export {default as OrderStatusDropdown} from "./OrderStatusDropdown/OrderStatusDropdown";
