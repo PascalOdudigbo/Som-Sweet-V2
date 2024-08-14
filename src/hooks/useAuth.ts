@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { UserType } from '@/utils/allModelTypes';
 import { parseJwt } from '@/utils/userManagement';
 import { useRouter } from 'next/navigation';
+import { showToast } from '@/utils/toast';
 
 export function useAuth() {
   // Initializing state variables for use data and its data loading
@@ -87,6 +88,7 @@ export function useAuth() {
     // Removing the login token from the localStorage and setting user data to null
     localStorage.removeItem('token');
     setUser(null);
+    showToast("success", "Logout successful")
     // Navigating to the store page 
     router.push("/store")
     

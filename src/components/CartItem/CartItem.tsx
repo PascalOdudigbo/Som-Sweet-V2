@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import Image from 'next/image'
 import { CartItemType } from '@/utils/allModelTypes'
 import './_cart_item.scss'
@@ -24,6 +24,12 @@ function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
     }
   }
 
+   // Defining a function to dynamially process the product description
+   const productDescription = useMemo(() => {
+    const description = (item?.product?.description?.length !== undefined) && (item?.product?.description?.length < 80) ? item?.product?.description : item?.product?.description?.slice(0, 100) + "..."
+    return description
+}, [item?.product?.description]);
+
   const totalPrice = item.variation 
     ? item.variation.price * item.quantity 
     : item.product.basePrice * item.quantity
@@ -40,10 +46,12 @@ function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
       <div className='item_details flex_column'>
         <div className='name_and_price_wrapper flex_column'>
           <h3 className='item_name'>{item.product.name}</h3>
+          <p className='item_custom_text'>{productDescription}</p>
           <p className='item_price'>£{totalPrice.toFixed(2)}</p>
+         
         </div>
         {item.variation && (
-          <p className='item_variation'>{item.variation.name}</p>
+          <p className='item_variation'>Variation: {item.variation.name}</p>
         )}
         {item.customText && (
           <p className='item_custom_text'>Custom: {item.customText}</p>

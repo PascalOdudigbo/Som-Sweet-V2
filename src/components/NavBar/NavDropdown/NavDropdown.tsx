@@ -4,7 +4,8 @@ import { profileIcon, upIcon } from "../../../assets";
 import "./_navDropdown.scss";
 import Link from 'next/link';
 import { UserType } from '@/utils/allModelTypes';
-import { useAuth } from '@/hooks/useAuth';
+import { useCart } from '@/components/contexts/CartProvider';
+import { useAuth } from '@/components/contexts/AuthProvider';
 
 // Defining the DropdownItem prop
 type DropdownItemProps = {
@@ -40,6 +41,8 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
 
   // Getting the logout function from the useAuth hook
   const {logout} = useAuth();
+  // Getting setCart from the cartProvider
+  const {setCart} = useCart()
 
   // Defining the Dropdown item component  
   const DropdownItem: FC<DropdownItemProps> = ({ text, path }) => (
@@ -72,8 +75,12 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
           {!user?.id && navLinks.map((link, index) => 
             link.name.toLowerCase() !== "logout" 
               ? <DropdownItem key={index} text={link.name} path={link.href} />
-              : <DropdownLogoutItem key={index} text={link.name} path={link.href} onClick={()=>{logout()}}/>
+              : <DropdownLogoutItem key={index} text={link.name} path={link.href} onClick={()=>{
+                setCart(null)
+                logout()
+              }}/>
           )}
+          {user?.id && <DropdownLogoutItem text={"Logout"} onClick={()=>{logout()}}/>}
         </section>
       </section>
     </div>
