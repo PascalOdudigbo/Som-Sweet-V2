@@ -7,6 +7,7 @@ import { showToast } from '@/utils/toast'
 
 interface CartContextType {
   cart: CartType | null
+  setCart:  React.Dispatch<React.SetStateAction<CartType | null>>
   addItem: (product: ProductType, variation: ProductVariationType | null, quantity: number, customText: string) => Promise<void>
   removeItem: (itemId: number) => Promise<void>
   updateItemQuantity: (itemId: number, newQuantity: number) => Promise<void>
@@ -69,7 +70,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   return (
-    <CartContext.Provider value={{ cart, addItem, removeItem, updateItemQuantity, clearCart }}>
+    <CartContext.Provider value={{ cart, setCart, addItem, removeItem, updateItemQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   )

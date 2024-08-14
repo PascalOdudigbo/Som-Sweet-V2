@@ -12,12 +12,15 @@ export {default as Dropdown} from "./Dropdown/Dropdown";
 export {default as Checkbox} from "./CheckBox/CheckBox";
 export {default as DropdownCheckbox} from "./DropdownCheckbox/DropdownCheckbox";
 export {default as Loading} from "./Loading/Loading";
+export {default as Category} from "./Category/Category";
 export {default as Product} from "./Product/Product";
 export {default as LatestTreats} from "./LatestTreats/LatestTreats"
 export {default as EmblaCarouselDiscounts} from "./EmblaCarouselDiscounts/EmblaCarouselDiscounts"
 export {default as MinimizableLayout} from "./Layouts/MinimizableLayout/MinimizableLayout";
 export {default as Recommendations} from "./Recommendations/Recommendations";
 export {default as CustomRating} from "./CustomRating/CustomRating";
+export {default as CartItem} from "./CartItem/CartItem";
+
 
 
 // export {default as StaffRow} from "./StaffRow/StaffRow";
@@ -27,9 +30,7 @@ export {default as CustomRating} from "./CustomRating/CustomRating";
 // export {default as VariationRow} from "./VariationRow/VariationRow";
 // export {default as OfferRow} from "./OfferRow/OfferRow";
 // export {default as OfferProductsRow} from "./OfferProductsRow/OfferProductsRow";
-// export {default as Category} from "./Category/Category";
 
-// export {default as CartItem} from "./CartItem/CartItem";
 // export {default as OrderRow} from "./OrderRow/OrderRow";
 // export {default as OrderStatusDropdown} from "./OrderStatusDropdown/OrderStatusDropdown";
 // export { default as Pagination } from './Pagination/Pagination';

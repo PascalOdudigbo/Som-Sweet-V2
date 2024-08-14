@@ -44,7 +44,7 @@ function NavBar() {
     window.addEventListener('hashchange', handleHashChange);
     setCurrentHash(window.location.hash);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [user, cart]);
+  }, []);
 
   const isLinkActive = (href: string) => {
     // If the window is undefined return false

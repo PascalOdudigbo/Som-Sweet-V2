@@ -11,6 +11,7 @@ import { getProductById } from '@/utils/productsManagement'
 import { showToast } from '@/utils/toast'
 import { addToCart } from '@/utils/cartManagement'
 import { useAuth } from '@/hooks/useAuth'
+import { useCart } from '@/components/contexts/CartProvider'
 
 // Defining the product image props type
 interface ProductImageProps {
@@ -89,7 +90,8 @@ function Product() {
   const router = useRouter();
   // getting the user data and loading status
   const { user, loading, loadUserFromToken } = useAuth();
-
+// Getting the setCart from the CartProvider
+const {setCart} = useCart()
   useEffect(() => {
     // Gettin the product 
     const fetchProduct = async () => {
@@ -146,6 +148,8 @@ function Product() {
         // If the product was added to cart successfully
         showToast("success", "Product added to cart successfully");
         loadUserFromToken();
+        setCart(updatedCart)
+       
       }
     } catch (error) {
       console.error("Error adding to cart:", error);

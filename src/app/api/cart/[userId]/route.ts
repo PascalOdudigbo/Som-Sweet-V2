@@ -2,22 +2,31 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/db/db';
 import { verifyToken } from '@/utils/auth';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { userId: string } }
 ) {
   try {
-    const token = req.headers.get('Authorization')?.split(' ')[1];
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-    
-    const decodedUserId = await verifyToken(token);
-    if (!decodedUserId || decodedUserId.toString() !== params.userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+   // Getting the access token from the request header
+   const token = req.headers.get('Authorization')?.split(' ')[1];
+   if (!token) {
+     // If there's no access token 
+     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+   }
+   // Getting the User ID from the token
+   const decodedUserId = await verifyToken(token);
+   if (!decodedUserId) {
+     return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+   }
+   // Getting the userID from the router params
+    const userId = parseInt(params.userId);
+    // validating the ID against the token
+    if (decodedUserId !== userId){
+      return NextResponse.json({ error: 'Invalid token or route' }, { status: 401 });
     }
 
-    const userId = parseInt(params.userId);
     // Getting the user's cart
     let cart = await prisma.cart.findUnique({
       where: { userId },
@@ -35,6 +44,7 @@ export async function GET(
       },
     });
 
+    // If the user is new create a cart 
     if (!cart) {
       cart = await prisma.cart.create({
         data: { userId },
@@ -52,7 +62,7 @@ export async function GET(
         },
       });
     }
-
+     // Send the cart data back
     return NextResponse.json(cart);
   } catch (error) {
     console.error('Failed to fetch cart:', error);

@@ -1,10 +1,9 @@
 'use client'
-import { EmblaCarouselDiscounts, Loading, NavChildFooterLayout, Product, Search } from '@/components'
+import { Category, EmblaCarouselDiscounts, Loading, NavChildFooterLayout, Product, Search } from '@/components'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import "./_store.scss"
 import { CategoryType, DiscountType, ProductType } from '../../utils/allModelTypes'
-import Category from '@/components/Category/Category'
 import { filterIcon } from '@/assets'
 import { getAllProducts, searchProducts } from '@/utils/productsManagement'
 import { getAllCategories } from '@/utils/categoryManagement'
