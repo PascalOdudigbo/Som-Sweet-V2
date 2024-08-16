@@ -47,7 +47,7 @@ function Offer() {
 
     return (
         <NavChildFooterLayout>
-            <main className='offer_main_container'>
+            <main className='offer_main_container page_container'>
                 <Image className='offer_image' src={discount.imageUrl?.toString() ?? ""} alt={discount.name} title={discount.description ?? ""} height={450} width={1200} quality={100}/>
 
                 <h2 className='offer_page_title'>{discount?.name?.toUpperCase()}</h2>

@@ -84,12 +84,15 @@ function Store() {
   return (
     <NavChildFooterLayout>
       <main className='shop_main_container page_container flex_column_center'>
-        { <section className='shop_offers_container flex_column'>
-          <h1 className='section_title'>OFFERS</h1>
-          {
-            <EmblaCarouselDiscounts discounts={discounts}/>
-          }
-        </section>}
+        {
+          discounts.length > 0 &&
+          <section className='shop_offers_container flex_column'>
+            <h1 className='section_title'>OFFERS</h1>
+            {
+              <EmblaCarouselDiscounts discounts={discounts} />
+            }
+          </section>
+        }
 
         <section className='shop_categories_container flex_column_center'>
           <div className='section_title_button_container flex_row_center'>
@@ -121,6 +124,7 @@ function Store() {
 
           <div className='products_container'>
             {filteredProducts.map(product => (
+              product.active &&
               <Product key={product.id} product={product} />
             ))}
           </div>

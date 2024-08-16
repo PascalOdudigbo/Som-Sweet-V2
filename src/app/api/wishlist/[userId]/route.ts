@@ -39,6 +39,9 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
                     }
 
                 }
+            },
+            orderBy: {
+                id: 'desc'
             }
         });
 
