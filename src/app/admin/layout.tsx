@@ -10,7 +10,7 @@ import { FaClipboardUser } from 'react-icons/fa6'
 import { MdCategory } from 'react-icons/md'
 import { TbRosetteDiscountCheckFilled } from 'react-icons/tb'
 import "./_layout.scss"
-import { NavBar } from '@/components'
+import { Loading, NavBar } from '@/components'
 import { useAuth } from '@/components/contexts/AuthProvider'
 
 interface NavLinkType {
@@ -72,6 +72,11 @@ function Portal({ children }: PortalProps) {
   // getting the user data from context provider
   const { user } = useAuth()
   useEffect(() => { }, [user])
+
+  if(!user){
+    return <Loading/>
+  }
+
   if (user?.role?.name?.toLowerCase() !== "administrator") {
     return <div className='page_container flex_column_justify_center'>
       <h1 className='playfair_shadow_title_black'>404 Not Found</h1>

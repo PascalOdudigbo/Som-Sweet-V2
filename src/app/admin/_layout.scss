@@ -13,8 +13,8 @@
         justify-content: space-evenly;
 
         .portal_navigation_icon {
-            height: 30px;
-            width: 30px;
+            width: clamp(24px, 4vw, 30px);
+            height: clamp(24px, 4vw, 30px);
             color: var(--color-white);
 
             &:hover {
@@ -49,8 +49,8 @@
         justify-content: space-around;
 
         .portal_navigation_icon {
-            height: 30px;
-            width: 30px;
+            width: clamp(24px, 4vw, 30px);
+            height: clamp(24px, 4vw, 30px);
             color: var(--color-white);
 
             &:hover {
