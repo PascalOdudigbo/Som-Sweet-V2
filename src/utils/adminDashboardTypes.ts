@@ -37,6 +37,7 @@ export interface RecentActivity {
 export interface SalesOverviewData {
   month: string;
   sales: number;
+  error: string;
 }
 
 export interface DashboardData {

@@ -26,7 +26,7 @@ function CartPage() {
             // setIsLoading(false)
         }
         fetchCart()
-    }, [user])
+    }, [user, setCart])
     // A function to handle the remove item button onClick event
     const handleRemoveItem = async (itemId: number) => {
         if (user && cart) {

@@ -115,34 +115,45 @@ export async function getRecentActivity() {
 
 // Sales overview data (for chart)
 export async function getSalesOverview() {
-  // This is a placeholder. You'll need to adjust based on your specific chart requirements
-  const lastSixMonths = Array.from({ length: 6 }, (_, i) => {
-    const d = new Date();
-    d.setMonth(d.getMonth() - i);
-    return d.toISOString().slice(0, 7); // YYYY-MM format
-  }).reverse();
+  try {
+    const today = new Date();
+    const sixMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 5, 1);
 
-  const salesStats = await Promise.all(lastSixMonths.map(async (month) => {
-    const startOfMonth = new Date(month);
-    const endOfMonth = new Date(new Date(month).setMonth(startOfMonth.getMonth() + 1));
-    
-    const sales = await db.order.aggregate({
-      where: {
-        createdAt: {
-          gte: startOfMonth,
-          lt: endOfMonth
-        }
-      },
-      _sum: {
-        total: true
-      }
+    const salesData = await db.$queryRaw<Array<{ month: Date; total: number }>>`
+      SELECT DATE_TRUNC('month', "createdAt") as month, SUM(total) as total
+      FROM "Order"
+      WHERE "createdAt" >= ${sixMonthsAgo} AND "createdAt" < ${new Date(today.getFullYear(), today.getMonth() + 1, 1)}
+      GROUP BY DATE_TRUNC('month', "createdAt")
+      ORDER BY month ASC
+    `;
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const salesOverview = Array.from({ length: 6 }, (_, index) => {
+      const date = new Date(today.getFullYear(), today.getMonth() - 5 + index, 1);
+      const monthData = salesData.find(
+        (data) => data.month.getMonth() === date.getMonth() &&
+                  data.month.getFullYear() === date.getFullYear()
+      );
+
+      return {
+        month: `${monthNames[date.getMonth()]} ${date.getFullYear()}`,
+        sales: monthData ? Number(monthData.total) : 0,
+      };
     });
 
-    return {
-      month,
-      sales: sales._sum.total || 0
-    };
-  }));
-
-  return salesStats;
+    return salesOverview;
+  } catch (error) {
+    console.error('Error in getSalesOverview:', error);
+    // Return fallback data
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return Array.from({ length: 6 }, (_, i) => {
+      const d = new Date();
+      d.setMonth(d.getMonth() - i);
+      return {
+        month: `${monthNames[d.getMonth()]} ${d.getFullYear()}`,
+        sales: 0
+      };
+    }).reverse();
+  }
 }

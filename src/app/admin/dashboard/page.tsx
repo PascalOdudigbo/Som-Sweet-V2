@@ -25,6 +25,7 @@ function Dashboard() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [salesOverviewError, setSalesOverviewError] = useState(false);
 
   const router = useRouter();
 
@@ -68,6 +69,13 @@ function Dashboard() {
         salesOverviewResponse.json()
       ]);
 
+      // If the salesOverview fetch encountered an error
+      if (salesOverview.error) {
+        setSalesOverviewError(true);
+      } else {
+        setSalesOverviewError(false);
+      }
+
       setDashboardData({
         staff,
         customers,
@@ -75,11 +83,11 @@ function Dashboard() {
         offers,
         orders,
         recentActivity,
-        salesOverview
+        salesOverview: Array.isArray(salesOverview) ? salesOverview : []
       });
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
-      setError('Failed to load dashboard data. Please try again.');
+      setError('Failed to load some dashboard data. Please try again or contact support.');
     } finally {
       setIsLoading(false);
     }
@@ -170,26 +178,33 @@ function Dashboard() {
       <div className="dashboard_chart_container flex_column_justify_center">
         <h2>Sales Overview</h2>
         <p>An overview of the sales for the last six months.</p>
-
-        <BarChart
-          className='dashboard_chart'
-          xAxis={[
-            {
-              id: 'barCategories',
-              data: dashboardData?.salesOverview?.map((item) => item?.month) ?? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-              scaleType: 'band',
-            },
-          ]}
-          series={[
-            {
-              data: dashboardData?.salesOverview?.map((item) => item?.sales) ?? [0, 0, 0, 0, 0, 0],
-            },
-          ]}
-          width={500}
-          height={300}
-        />
+        {dashboardData.salesOverview && dashboardData.salesOverview.length > 0 ? (
+          <>
+            <BarChart
+              className='dashboard_chart'
+              xAxis={[
+                {
+                  id: 'barCategories',
+                  data: dashboardData.salesOverview.map((item) => item.month),
+                  scaleType: 'band',
+                },
+              ]}
+              series={[
+                {
+                  data: dashboardData.salesOverview.map((item) => item.sales),
+                },
+              ]}
+              width={500}
+              height={300}
+            />
+            {salesOverviewError && (
+              <p className="data-warning">Note: Using estimated data due to an error in fetching recent sales information.</p>
+            )}
+          </>
+        ) : (
+          <p>No sales data available.</p>
+        )}
       </div>
-
       <div className="dashboard_recent_activity">
         <h2>Recent Activity</h2>
         <ul>
