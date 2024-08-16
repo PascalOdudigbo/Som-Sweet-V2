@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import "./_wishlist.scss"
-import { Loading, NavChildFooterLayout, Product } from '@/components';
+import { Loading, NavChildFooterLayout, Product, Recommendations } from '@/components';
 import { useParams, useRouter } from 'next/navigation';
 import { UserWishlistType } from '@/utils/allModelTypes';
 import { showToast } from '@/utils/toast';
@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { getWishlist } from '@/utils/wishlistManagement';
 import { useAuth } from '@/components/contexts/AuthProvider';
 import { wishlistBg } from '@/assets';
+import { isInWishlist } from '@/utils/productsManagement';
 
 
 
@@ -65,6 +66,11 @@ function Wishlist() {
                         />
                     ))}
                 </section>
+
+                {
+                   ( wishlist && wishlist?.length > 0) && wishlist[0]?.product &&
+                    <Recommendations product={wishlist[0]?.product } />
+                }
 
             </main>
 
