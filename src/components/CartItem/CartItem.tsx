@@ -4,6 +4,10 @@ import React, { useMemo } from 'react'
 import Image from 'next/image'
 import { CartItemType } from '@/utils/allModelTypes'
 import './_cart_item.scss'
+import { useAuth } from '../contexts/AuthProvider'
+import { isInWishlist } from '@/utils/productsManagement'
+import { likeIconActive, likeIconInctive } from '@/assets'
+import { addToWishlist, removeFromWishlist } from '@/utils/wishlistManagement'
 
 type CartItemProps = {
   item: CartItemType;
@@ -12,6 +16,9 @@ type CartItemProps = {
 }
 
 function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
+  // Getting the user data 
+  const {user, loadUserFromToken} = useAuth()
+
   // onClick function to handle cart item quantity change
   const handleQuantityChange = async (change: number) => {
     const newQuantity = item.quantity + change
@@ -36,6 +43,26 @@ function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
 
   return (
     <div className='cart_item_wrapper flex_column'>
+      {
+                user?.wishlist && <Image
+                className={`wishlist_icon`}
+                src={isInWishlist(user?.wishlist, item?.product?.id) ? likeIconActive : likeIconInctive}
+                alt={item?.product?.name}
+                width={35}
+                height={35}
+                onClick={()=>{
+                    if (user.wishlist && isInWishlist(user?.wishlist, item?.product?.id)){
+                        removeFromWishlist(user.id, item?.product?.id)
+                        loadUserFromToken()
+                    }
+                    else{
+                        addToWishlist(user.id, item?.product?.id)
+                        loadUserFromToken()
+                    }
+
+                }}
+            />
+            }
       <Image 
         className='product_image' 
         src={item?.product?.images && item?.product?.images[0]?.imageUrl || ''}

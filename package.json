@@ -14,7 +14,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.16.1",
-    "@prisma/client": "^5.17.0",
+    "@prisma/client": "^5.18.0",
     "@stripe/react-stripe-js": "^2.7.3",
     "@stripe/stripe-js": "^4.1.0",
     "bcryptjs": "^2.4.3",
@@ -39,7 +39,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
-    "prisma": "^5.17.0",
+    "prisma": "^5.18.0",
     "sass": "^1.77.6",
     "typescript": "^5"
   }

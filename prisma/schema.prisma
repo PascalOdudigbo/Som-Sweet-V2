@@ -23,7 +23,7 @@ model User {
   addresses     Address[]
   orders        Order[]
   reviews       ProductReview[]
-  wishlist      Product[]       @relation("UserWishlist")
+  wishlist      UserWishlist[]
   stripeCustomerId String?
   cart          Cart?
 }
@@ -75,7 +75,7 @@ model Product {
   orderItems  OrderItem[]
   discounts   DiscountProduct[]
   cartItems   CartItem[]
-  wishlistedBy User[]           @relation("UserWishlist")
+  wishlistedBy UserWishlist[]
 }
 
 model ProductVariation {
@@ -241,4 +241,15 @@ model Refund {
   updatedAt      DateTime  @updatedAt
   approvedBy     Int?
   approvedAt     DateTime?
+}
+
+model UserWishlist {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
 }

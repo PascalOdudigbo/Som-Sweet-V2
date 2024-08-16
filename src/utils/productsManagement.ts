@@ -1,4 +1,4 @@
-import { ProductType, ProductImageType } from "./allModelTypes";
+import { ProductType, ProductImageType, UserWishlistType } from "./allModelTypes";
 
 // A function to get all the products
 export async function getAllProducts(): Promise<ProductType[]> {
@@ -184,4 +184,9 @@ export async function getLatestProducts(): Promise<ProductType[]> {
     console.error('Error in getLatestProducts:', error);
     throw error;
   }
+}
+// A function to check if a product is in the user's wishlist
+export function isInWishlist(wishlist: UserWishlistType[], productId: number): boolean {
+  const IdArray = wishlist.map(item => item.productId)
+  return IdArray.includes(productId);
 }

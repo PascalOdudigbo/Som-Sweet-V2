@@ -9,6 +9,7 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<UserType>;
   logout: () => void;
+  loadUserFromToken: () => void;
 }
 
 // Creating the AuthContext

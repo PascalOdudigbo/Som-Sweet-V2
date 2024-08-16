@@ -49,11 +49,7 @@ export async function GET(req: NextRequest) {
             },
           },
         },
-        wishlist: {
-          include: {
-            images: true,
-          },
-        },
+        wishlist: true,
         cart: {
           include: {
             items: {

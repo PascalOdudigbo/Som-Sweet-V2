@@ -6,6 +6,19 @@
     overflow: hidden;
     text-align: left;
 
+    .wishlist_icon{
+        position: absolute;
+        height: 35px;
+        width: 35px;
+        z-index: 2;
+        margin-top: 20px;
+        margin-left: 20px;
+        cursor: pointer;
+        background-color: var(--color-white);
+        border-radius: 50%;   
+    }
+
+
     .product_image {
         width: 100%;
         aspect-ratio: 16 / 9;

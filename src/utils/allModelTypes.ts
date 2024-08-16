@@ -13,7 +13,7 @@ export type UserType = {
   addresses?: AddressType[];
   orders?: OrderType[];
   reviews?: ProductReviewType[];
-  wishlist?: ProductType[];
+  wishlist?: UserWishlistType[];
   stripeCustomerId?: string | null;
   cart?: CartType | null;
 }
@@ -65,7 +65,7 @@ export type ProductType = {
   orderItems?: OrderItemType[];
   discounts?: DiscountProductType[];
   cartItems?: CartItemType[];
-  wishlistedBy?: UserType[];
+  wishlistedBy?: UserWishlistType[];
 }
 
 export type ProductVariationType = {
@@ -226,4 +226,13 @@ export type RefundType = {
   approvedBy?: number | null;
   approvedAt?: Date | null;
   order?: OrderType;
+}
+
+export type UserWishlistType = {
+  id: number;
+  userId: number;
+  productId: number;
+  createdAt: Date;
+  user?: UserType;
+  product?: ProductType;
 }

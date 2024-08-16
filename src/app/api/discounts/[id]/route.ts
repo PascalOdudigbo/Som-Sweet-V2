@@ -14,7 +14,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
           include: {
             product: {
               include: {
-                images: true
+                images: true,
+                wishlistedBy: true,
               }
             }
           }

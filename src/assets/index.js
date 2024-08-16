@@ -9,6 +9,8 @@ export {default as minusIcon} from "./icons/minusIcon.png"
 export {default as emailIcon} from "./icons/emailIcon.png"
 export {default as passwordIcon} from "./icons/passwordIcon.png"
 export {default as userIcon} from "./icons/userIcon.png"
+export {default as likeIconActive} from "./icons/likeIconActive.png"
+export {default as likeIconInctive} from "./icons/likeIconInctive.png"
 
 
 

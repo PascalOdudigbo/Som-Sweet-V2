@@ -11,7 +11,50 @@ export async function POST(request: Request) {
     // Check if user exists
     const user = await db.user.findUnique({ 
       where: { email },
-      include: { role: true }
+      include: {
+        role: true,
+        addresses: true,
+        orders: {
+          include: {
+            orderItems: {
+              include: {
+                product: {
+                  include: {
+                    images: true,
+                  },
+                },
+                variation: true,
+              },
+            },
+            shippingAddress: true,
+            payment: true,
+          },
+        },
+        reviews: {
+          include: {
+            product: {
+              include: {
+                images: true,
+              },
+            },
+          },
+        },
+        wishlist: true,
+        cart: {
+          include: {
+            items: {
+              include: {
+                product: {
+                  include: {
+                    images: true,
+                  },
+                },
+                variation: true,
+              },
+            },
+          },
+        },
+      },
     });
     
     if (!user) {
