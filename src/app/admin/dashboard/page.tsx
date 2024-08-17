@@ -14,6 +14,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { FaClipboardUser } from 'react-icons/fa6';
 
 function Dashboard() {
+  // Defining a state variable to hold all the dashboard analytics
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     staff: null,
     customers: null,
@@ -23,15 +24,21 @@ function Dashboard() {
     recentActivity: null,
     salesOverview: null,
   });
+  // State variable to handle data fetch status
   const [isLoading, setIsLoading] = useState(false);
+  // State variables for holding error messages
   const [error, setError] = useState<string | null>(null);
   const [salesOverviewError, setSalesOverviewError] = useState(false);
 
+  // Router variable function for navigation
   const router = useRouter();
 
+  // Fetching the dashboard data from the backend
   const fetchDashboardData = useCallback(async () => {
+    // Setting loading and error status 
     setIsLoading(true);
     setError(null);
+    // fetching the required data
     try {
       const [
         staffResponse,
@@ -50,7 +57,7 @@ function Dashboard() {
         fetch('/api/admin/dashboard/recentActivity'),
         fetch('/api/admin/dashboard/salesOverview')
       ]);
-
+      // converting the data to json and initializng respective variables
       const [
         staff,
         customers,
@@ -75,7 +82,7 @@ function Dashboard() {
       } else {
         setSalesOverviewError(false);
       }
-
+      // setting up the dashboard data
       setDashboardData({
         staff,
         customers,
@@ -83,10 +90,11 @@ function Dashboard() {
         offers,
         orders,
         recentActivity,
-        salesOverview: Array.isArray(salesOverview) ? salesOverview : []
+        salesOverview: Array.isArray(salesOverview) ? salesOverview : [] // ensuring there's a default data for sames overview
       });
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
+      // Setting the error to be displayed
       setError('Failed to load some dashboard data. Please try again or contact support.');
     } finally {
       setIsLoading(false);
@@ -94,6 +102,7 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
+    // Calling the function to get all dashboard data
     fetchDashboardData();
   }, [fetchDashboardData]);
 
@@ -208,9 +217,9 @@ function Dashboard() {
       <div className="dashboard_recent_activity">
         <h2>Recent Activity</h2>
         <ul>
-          <li>New customer registered: {dashboardData?.recentActivity?.recentCustomer || 'Loading...'}</li>
-          <li>Order #{dashboardData?.recentActivity?.recentOrder || 'Loading...'} shipped</li>
-          <li>New product added: {dashboardData?.recentActivity?.recentProduct || 'Loading...'}</li>
+          <li>New customer registered: {dashboardData?.recentActivity?.recentCustomer}</li>
+          <li>Order #{dashboardData?.recentActivity?.recentOrder} shipped</li>
+          <li>New product added: {dashboardData?.recentActivity?.recentProduct}</li>
         </ul>
       </div>
     </main>

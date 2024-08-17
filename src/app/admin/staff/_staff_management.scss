@@ -1,0 +1,106 @@
+// Define some variables for easier maintenance
+// $max-width: 1200px;
+$mobile-padding: 1rem;
+$tablet-padding: 1.5rem;
+$desktop-padding: 2rem;
+
+.staff_management_wrapper {
+    min-height: 100vh;
+    padding: $mobile-padding;
+    // max-width: $max-width;
+    margin: 0 auto;
+
+    .add_staff_link_wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        h2 {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .add_staff_link {
+            width: 100%;
+            text-align: center;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    .search_wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: clamp(60px, 10vw, 90px);
+        padding: 0.2em 1em;
+        background-color: var(--color-purple);
+        margin-bottom: 1rem;
+    }
+
+    .staff_table, .role_table {
+        width: 100%;
+        overflow-x: auto;
+
+        .table_headers_wrapper {
+            border-radius: 5px;
+
+            .table_header {
+                font-family: var(--font-inter);
+                padding: clamp(5px, 1.5vw, 10px);
+                background-color: var(--color-lavenderPink);
+                font-size: clamp(0.8rem, 2vw, 0.9rem);
+                font-weight: 900;
+                color: #444;
+            }
+        }
+    }
+
+    .no_staff_text {
+        text-transform: capitalize;
+        color: var(--color-grey);
+        width: 100%;
+        text-align: center;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin-top: clamp(20px, 5vw, 40px);
+        font-family: var(--font-inter);
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .staff_management_wrapper {
+        padding: $tablet-padding;
+
+        .add_staff_link_wrapper {
+            flex-direction: row;
+            justify-content: space-between;
+
+            h2 {
+                margin-bottom: 0;
+            }
+
+            .add_staff_link {
+                width: auto;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .staff_management_wrapper {
+        padding: $desktop-padding;
+
+        .add_staff_link_wrapper, 
+        .search_wrapper, 
+        .staff_table, 
+        .role_table {
+            width: 96%;
+            // max-width: $max-width;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
