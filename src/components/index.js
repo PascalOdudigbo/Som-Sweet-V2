@@ -22,10 +22,10 @@ export {default as CustomRating} from "./CustomRating/CustomRating";
 export {default as CartItem} from "./CartItem/CartItem";
 export {default as StaffRow} from "./StaffRow/StaffRow";
 export {default as RoleRow} from "./RoleRow/RoleRow";
+export {default as CategoryRow} from "./CategoryRow/CategoryRow";
 
 
 
-// export {default as CategoryRow} from "./CategoryRow/CategoryRow";
 // export {default as ProductRow} from "./ProductRow/ProductRow";
 // export {default as VariationRow} from "./VariationRow/VariationRow";
 // export {default as OfferRow} from "./OfferRow/OfferRow";

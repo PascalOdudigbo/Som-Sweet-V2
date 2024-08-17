@@ -42,7 +42,7 @@ export type AddressType = {
 export type CategoryType = {
   id: number;
   name: string;
-  image: string;
+  image: string | StaticImageData;
   imagePublicId: string;
   createdAt: Date;
   updatedAt: Date;

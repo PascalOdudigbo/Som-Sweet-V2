@@ -32,8 +32,8 @@ function NavBar() {
   const [currentHash, setCurrentHash] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // getting the user data from the useAuth hook
-  const {user} = useAuth()
-  const {cart} = useCart()
+  const { user } = useAuth()
+  const { cart } = useCart()
 
   // Router variable function
   const router = useRouter();
@@ -81,10 +81,13 @@ function NavBar() {
         <section className='nav_dropdown_cart_container'>
           <NavDropdown user={user} />
 
-          {user?.role?.name.toLowerCase() === "customer" &&<section className='nav_badge_cart_container' onClick={() => { router.push("/cart") }}>
-            <p className='nav_badge'>{cart?.items?.length ?? 0}</p>
-            <Image src={cartIcon} alt='cart icon' height={24} width={24} title='Cart' />
-          </section>}
+          {
+            user?.role?.name.toLowerCase() === "customer" &&
+            <section className='nav_badge_cart_container' onClick={() => { router.push("/cart") }}>
+              <p className='nav_badge'>{cart?.items?.length ?? 0}</p>
+              <Image src={cartIcon} alt='cart icon' height={24} width={24} title='Cart' />
+            </section>
+          }
 
           <div className='nav_mobile_menu' onClick={toggleMobileMenu}>
             ☰
@@ -132,7 +135,7 @@ function NavBar() {
 
       <section className={`nav_mobile_links ${mobileMenuOpen ? 'active' : ''}`}>
         <section className='search_container'>
-          <Search/>
+          <Search />
           <section className='search_content'>
 
           </section>
