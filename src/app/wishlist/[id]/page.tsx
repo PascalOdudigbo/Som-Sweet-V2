@@ -10,6 +10,7 @@ import { getWishlist } from '@/utils/wishlistManagement';
 import { useAuth } from '@/components/contexts/AuthProvider';
 import { wishlistBg } from '@/assets';
 import { isInWishlist } from '@/utils/productsManagement';
+import Link from 'next/link';
 
 
 
@@ -49,6 +50,25 @@ function Wishlist() {
         return <Loading />
     }
 
+    if (wishlist?.length === 0) {
+        return (
+            <NavChildFooterLayout>
+                <main className='wishlist_main_container page_container'>
+                    <Image className='wishlist_image' src={wishlistBg} alt={"Your wishlist"} title={"Your wishlist"} height={450} width={1200} quality={100} />
+
+                    <div className='flex_row_center'>
+                        <h1 className='section_title'>YOUR WISHLIST</h1>
+                    </div>
+
+                    <p className='empty_wishlist_text'>Your wishlist is empty, <Link className={"empty_wishlist_link"} href={"/store"}>start wishlisting treats</Link></p>
+
+                </main>
+
+            </NavChildFooterLayout>
+
+        )
+    }
+
     return (
         <NavChildFooterLayout>
             <main className='wishlist_main_container page_container'>
@@ -68,8 +88,8 @@ function Wishlist() {
                 </section>
 
                 {
-                   ( wishlist && wishlist?.length > 0) && wishlist[0]?.product &&
-                    <Recommendations product={wishlist[0]?.product } />
+                    (wishlist && wishlist?.length > 0) && wishlist[0]?.product &&
+                    <Recommendations product={wishlist[0]?.product} />
                 }
 
             </main>

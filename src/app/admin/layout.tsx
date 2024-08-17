@@ -8,7 +8,7 @@ import { FaUser, FaShippingFast } from 'react-icons/fa'
 import { GiShoppingBag } from 'react-icons/gi'
 import { FaClipboardUser } from 'react-icons/fa6'
 import { MdCategory } from 'react-icons/md'
-import { TbRosetteDiscountCheckFilled } from 'react-icons/tb'
+import { RiDiscountPercentFill } from 'react-icons/ri'
 import "./_layout.scss"
 import { Loading, NavBar } from '@/components'
 import { useAuth } from '@/components/contexts/AuthProvider'
@@ -26,7 +26,7 @@ const navLinks: NavLinkType[] = [
   { title: "Customers Management", icon: FaUser, route: "/admin/customers", badgeContent: 3 },
   { title: "Categories Management", icon: MdCategory, route: "/admin/categories", badgeContent: 0 },
   { title: "Products Management", icon: GiShoppingBag, route: "/admin/products", badgeContent: 0 },
-  { title: "Offers Management", icon: TbRosetteDiscountCheckFilled, route: "/admin/offers", badgeContent: 0 },
+  { title: "Offers Management", icon: RiDiscountPercentFill, route: "/admin/offers", badgeContent: 0 },
   { title: "Order Management", icon: FaShippingFast, route: "/admin/orders", badgeContent: 0 },
 ];
 

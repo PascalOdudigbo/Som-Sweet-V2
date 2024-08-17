@@ -4,7 +4,7 @@ import { IconContext } from 'react-icons'
 import { FaUser } from 'react-icons/fa'
 import { GiShoppingBag } from 'react-icons/gi'
 import { MdReviews } from 'react-icons/md'
-import { TbRosetteDiscountCheckFilled } from 'react-icons/tb'
+import { RiDiscountPercentFill } from 'react-icons/ri'
 import { MdRefresh } from 'react-icons/md';
 import "./_dashboard.scss"
 import { DashboardData } from '@/utils/adminDashboardTypes'
@@ -165,7 +165,7 @@ function Dashboard() {
 
         <div className="dashboard_card" onClick={() => { router.push("/admin/offers") }} aria-label="Offer information">
           <IconContext.Provider value={{ className: "dashboard_icon" }}>
-            <TbRosetteDiscountCheckFilled />
+            <RiDiscountPercentFill />
           </IconContext.Provider>
           <h2>Offers</h2>
           <p title="Number of active offers">Active: {dashboardData?.offers?.activeOffers}</p>

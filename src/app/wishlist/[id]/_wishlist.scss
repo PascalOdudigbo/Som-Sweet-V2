@@ -14,6 +14,18 @@
         font-weight: lighter;
     }
 
+    .empty_wishlist_text {
+        font-size: clamp(14px, 2.5vw, 28px);        
+        text-align: center;
+        font-family: var(--font-questrial);
+        color: var(--color-dark_grey);
+  
+        .empty_wishlist_link{
+          color: var(--color-cerulean);
+          text-decoration: underline;
+        }
+      }
+
     .wishlist_page_text {
         font-family: var(--font-questrial);
         font-size: clamp(14px, 2.5vw, 24px);

@@ -8,6 +8,7 @@ import { CartType, CartItemType } from '@/utils/allModelTypes'
 import './_cart.scss'
 import { useAuth } from '@/components/contexts/AuthProvider'
 import { useCart } from '@/components/contexts/CartProvider'
+import Link from 'next/link'
 
 function CartPage() {
     // Defining state variables to handle data and process status
@@ -55,7 +56,7 @@ function CartPage() {
             <NavChildFooterLayout>
                 <main className='cart_container page_container flex_column_center'>
                     <h1 className='cart_heading section_title'>Your Cart</h1>
-                    <p className='empty_cart_text'>Your cart is empty</p>
+                    <p className='empty_cart_text'>Your cart is empty, <Link className={"empty_cart_link"} href={"/store"}>start adding treats</Link></p>
                 </main>
             </NavChildFooterLayout>
 
