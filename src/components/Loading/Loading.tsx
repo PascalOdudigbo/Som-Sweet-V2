@@ -16,7 +16,7 @@ function Loading() {
     }, 20000)
     // clearing the timeout on unmount
     return () => clearTimeout(timeout)
-  }, [])
+  }, [router])
 
   return (
     <div className='loading_container'>

@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Checkbox, Dropdown, FormInput, TextArea } from '@/components'
+import { Checkbox, Dropdown, FormInput, Loading, TextArea } from '@/components'
 import { IconContext } from 'react-icons'
 import { BsImageFill } from 'react-icons/bs'
 import { AiFillDelete } from 'react-icons/ai'
@@ -101,7 +101,9 @@ function EditProduct({ params }: { params: { id: string } }) {
     }
   }
 
-  if (!product) return <div>Loading...</div>
+  if (!product){
+    return <Loading/>
+  }
 
   return (
     <div className='edit_product_wrapper'>
@@ -225,7 +227,7 @@ function EditProduct({ params }: { params: { id: string } }) {
         </div>
       </form>
 
-      <Variations productId={product?.id ?? 0}/>
+      <Variations/>
 
       
     </div>
