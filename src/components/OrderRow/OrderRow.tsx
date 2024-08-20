@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { OrderType } from '@/utils/allModelTypes'
 import { OrderStatusDropdown } from '@/components'
 import './_order_row.scss'
+import { EmailDetails, sendEmail } from '@/utils/emailJS'
 
 // Defining the order row props
 interface OrderRowProps {
@@ -14,6 +15,24 @@ function OrderRow({ order, onStatusChange }: OrderRowProps) {
   // State variable to manage order details view
   const [isExpanded, setIsExpanded] = useState(false)
 
+  const handleStatusChange = async (newStatus: string | number) => {
+    await onStatusChange(order.id, newStatus.toString())
+
+    if (order.user) {
+      const emailDetails: EmailDetails = {
+        emailTitle: `Som' Sweet: Order Update!`,
+        username: order.user.username,
+        emailTo: order.user.email,
+        notice: `This email was intended for ${order.user.username}, if you're not the intended recipient please disregard or delete it`,
+        emailBody: `We're thrilled to have you patronize us ${order.user.username.split("")[0]}! 
+        
+        Your order #${order.id} has been updated to a new status: ${newStatus}.`,
+      }
+
+      await sendEmail(emailDetails, "info", "Update email sent!")
+    }
+  }
+
   return (
     <>
       <tr className="order_row">
@@ -23,7 +42,7 @@ function OrderRow({ order, onStatusChange }: OrderRowProps) {
         <td>
           <OrderStatusDropdown
             currentStatus={order.status}
-            onStatusChange={(newStatus: string | number) => onStatusChange(order.id, newStatus.toString())}
+            onStatusChange={(newStatus: string | number) => handleStatusChange(newStatus)}
           />
         </td>
         <td>{new Date(order.createdAt).toLocaleDateString()}</td>

@@ -47,7 +47,7 @@ function OrdersManagement() {
     setSearchTerm(term)
   }
 
-  // A function to handle order status change
+  // A function to handle order status change 
   const handleStatusChange = async (orderId: number, newStatus: string) => {
     try {
       const updatedOrder = await updateOrderStatusAdmin(orderId, newStatus)

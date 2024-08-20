@@ -35,7 +35,7 @@ function AddOfferProduct({ params }: { params: { id: string } }) {
     }
     // Calling the function
     fetchProducts()
-  }, [])
+  }, [params.id])
 
   // On click function to handle adding offer to the database
   const handleSubmit = async (e: React.FormEvent) => {
