@@ -30,5 +30,6 @@ export {default as loginBg2} from "./images/loginBg2.png"
 export {default as loginBg3} from "./images/loginBg3.png"
 export {default as imagePlaceholder} from "./images/imagePlaceholder.png"
 export {default as wishlistBg} from "./images/wishlistBg.jpg"
+export {default as cartBg} from "./images/cartBg.png"
 
 

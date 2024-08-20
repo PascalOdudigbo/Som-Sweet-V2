@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react'
 import "./_contactus.scss"
 import { FormInput, TextArea } from '@/components'
-import { sendContactEmail, ContactDetails } from '@/utils/contactPageUtils'
+import { ContactDetails } from '@/utils/contactPageUtils'
 import { useAuth } from '@/components/contexts/AuthProvider'
+import { EmailDetails, sendEmail } from '@/utils/emailJS'
 
 
 function ContactUs() {
@@ -20,7 +21,19 @@ function ContactUs() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await sendContactEmail(contactDetails)
+    const emailDetails: EmailDetails = {
+      emailTitle: `Som' Sweet: New Contact Message from ${contactDetails.name}`,
+      username: "Som' Sweet Team",
+      emailTo: "oinkoinkbakeryke@gmail.com",
+      notice: "This is an automated message from your website's contact form.",
+      emailBody: `
+      Message Details:
+      Name: ${contactDetails.name}
+      Email: ${contactDetails.email}
+      Message: ${contactDetails.message}
+      `
+    }
+    await sendEmail(emailDetails, "success", "Message sent successfully!")
     // Reset form after submission
     setContactDetails({ name: "", email: "", message: "" })
   }

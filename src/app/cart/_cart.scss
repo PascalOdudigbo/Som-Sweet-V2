@@ -1,7 +1,25 @@
 .cart_container {
   width: 100%;
   padding: 2rem;
-  background-color: var(--color-white);
+  padding: 40px 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  // background-color: var(--color-white);
+  
+
+  .cart_image {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    max-height: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    margin-top: 20px;
+    margin-bottom: 25px;
+  }
 
   .cart_heading {
     font-size: clamp(28px, 5vw, 40px);

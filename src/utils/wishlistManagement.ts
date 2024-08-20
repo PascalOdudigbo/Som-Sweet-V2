@@ -1,4 +1,4 @@
-// utils/wishlistManagement.ts
+// utils/wishlistManagement
 
 import { UserWishlistType } from './allModelTypes';
 import { showToast } from './toast';

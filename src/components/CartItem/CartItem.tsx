@@ -8,6 +8,7 @@ import { useAuth } from '../contexts/AuthProvider'
 import { isInWishlist } from '@/utils/productsManagement'
 import { likeIconActive, likeIconInctive } from '@/assets'
 import { addToWishlist, removeFromWishlist } from '@/utils/wishlistManagement'
+import { useRouter } from 'next/navigation'
 
 type CartItemProps = {
   item: CartItemType;
@@ -18,6 +19,9 @@ type CartItemProps = {
 function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
   // Getting the user data 
   const {user, loadUserFromToken} = useAuth()
+
+  // Router variable function to enable navigation
+  const router = useRouter()
 
   // onClick function to handle cart item quantity change
   const handleQuantityChange = async (change: number) => {
@@ -69,6 +73,7 @@ function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
         alt={item.product.name}
         width={400}
         height={225}
+        onClick={()=>{router.push(`/product/${item?.product?.id}`)}}
       />
       <div className='item_details flex_column'>
         <div className='name_and_price_wrapper flex_column'>

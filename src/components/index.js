@@ -25,11 +25,9 @@ export {default as RoleRow} from "./RoleRow/RoleRow";
 export {default as CategoryRow} from "./CategoryRow/CategoryRow";
 export {default as ProductRow} from "./ProductRow/ProductRow";
 export {default as VariationRow} from "./VariationRow/VariationRow";
+export {default as OfferRow} from "./OfferRow/OfferRow";
+export {default as OfferProductsRow} from "./OfferProductsRow/OfferProductsRow";
 
-
-
-// export {default as OfferRow} from "./OfferRow/OfferRow";
-// export {default as OfferProductsRow} from "./OfferProductsRow/OfferProductsRow";
 
 // export {default as OrderRow} from "./OrderRow/OrderRow";
 // export {default as OrderStatusDropdown} from "./OrderStatusDropdown/OrderStatusDropdown";

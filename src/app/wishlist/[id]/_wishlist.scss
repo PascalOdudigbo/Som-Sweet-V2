@@ -6,6 +6,19 @@
         margin-bottom: 30px;
     margin: 0 auto;
 
+    .wishlist_image {
+        width: 100%;
+        max-width: 1200px;
+        height: auto;
+        max-height: 420px;
+        margin-left: auto;
+        margin-right: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        margin-top: 20px;
+        margin-bottom: 25px;
+      }
+
     .wishlist_page_title {
         font-size: clamp(24px, 4vw, 40px);
         text-align: center;
@@ -48,18 +61,6 @@
         justify-content: center;
     }
 
-    .wishlist_image {
-        width: 100%;
-        max-width: 1200px;
-        height: auto;
-        max-height: 420px;
-        margin-left: auto;
-        margin-right: auto;
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-        margin-top: 20px;
-        margin-bottom: 25px;
-      }
 }
 
 /* Media Queries */
