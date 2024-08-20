@@ -27,11 +27,9 @@ export {default as ProductRow} from "./ProductRow/ProductRow";
 export {default as VariationRow} from "./VariationRow/VariationRow";
 export {default as OfferRow} from "./OfferRow/OfferRow";
 export {default as OfferProductsRow} from "./OfferProductsRow/OfferProductsRow";
-
-
-// export {default as OrderRow} from "./OrderRow/OrderRow";
-// export {default as OrderStatusDropdown} from "./OrderStatusDropdown/OrderStatusDropdown";
-// export { default as Pagination } from './Pagination/Pagination';
+export {default as OrderRow} from "./OrderRow/OrderRow";
+export {default as OrderStatusDropdown} from "./OrderStatusDropdown/OrderStatusDropdown";
+export { default as Pagination } from './Pagination/Pagination';
 
 //Layouts
 export {default as NavChildFooterLayout} from "./Layouts/NavChildrenFooterLayout";

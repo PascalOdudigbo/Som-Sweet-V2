@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Loading, ProductRow, Search } from '@/components'
+import { Loading, Pagination, ProductRow, Search } from '@/components'
 import Link from 'next/link'
 import { ProductType } from '@/utils/allModelTypes';
 import "./_products.scss"
@@ -13,6 +13,8 @@ function Products() {
     const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [productsPerPage] = useState(5)
 
     useEffect(() => {
         // Fetching all the products data from the database
@@ -46,9 +48,19 @@ function Products() {
     const handleSearch = (term: string) => {
         setSearchTerm(term);
     };
+
+    // Get current orders
+    const indexOfLastProduct = currentPage * productsPerPage
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+
+    // Change page
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
+
     // Displaying the loading component if the data hasn't been fetched yet
     if (isLoading) {
-        return <Loading/>;
+        return <Loading />;
     }
 
     return (
@@ -58,7 +70,7 @@ function Products() {
                 <Link href={"/admin/products/add"} className='add_product_link border_button_void'>ADD</Link>
             </section>
             <div className="search_wrapper">
-                <Search onSearch={handleSearch}/>
+                <Search onSearch={handleSearch} />
             </div>
 
             <table className="products_table">
@@ -75,7 +87,7 @@ function Products() {
                 </thead>
 
                 <tbody className='table_body'>
-                    {filteredProducts.map((product) => (
+                    {currentProducts.map((product) => (
                         <ProductRow
                             key={product.id}
                             product={product}
@@ -86,6 +98,13 @@ function Products() {
             </table>
 
             {filteredProducts.length < 1 && <h3 className="p__inter no_products_text">NO PRODUCTS FOUND</h3>}
+
+            <Pagination
+                itemsPerPage={productsPerPage}
+                totalItems={filteredProducts.length}
+                paginate={paginate}
+                currentPage={currentPage}
+            />
         </main>
     )
 }
