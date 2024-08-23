@@ -6,6 +6,8 @@ import { getUserOrders } from '@/utils/orderManagement'
 import { useAuth } from '@/components/contexts/AuthProvider'
 import { OrderType } from '@/utils/allModelTypes'
 import './_orders.scss'
+import { ordersBg } from '@/assets'
+import Image from 'next/image'
 
 function MyOrders() {
   // Initializing the state variables for dynamic data management
@@ -21,7 +23,6 @@ function MyOrders() {
         try {
           // Getting the data using the util function
           const fetchedOrders = await getUserOrders(user.id)
-          console.log(fetchedOrders)
           setOrders(fetchedOrders)
         } catch (error) {
           // In the eventuality of an error occuring
@@ -39,7 +40,9 @@ function MyOrders() {
   return (
     <NavChildFooterLayout>
       <main className='my_orders_container page_container'>
-        <h1 className='page_title'>My Orders</h1>
+      <Image className='orders_image' src={ordersBg} alt={"Your wishlist"} title={"Your wishlist"} height={450} width={1200} quality={100} />
+
+        <h1 className='page_title'>Your Orders</h1>
         {orders.length === 0 ? (
           <p>You have no orders yet.</p>
         ) : (

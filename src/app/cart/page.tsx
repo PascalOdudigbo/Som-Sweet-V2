@@ -10,13 +10,13 @@ import { useAuth } from '@/components/contexts/AuthProvider'
 import { useCart } from '@/components/contexts/CartProvider'
 import Link from 'next/link'
 import Image from 'next/image'
-import { cartBg } from '@/assets'
+import { cartBg, emptyCartBg } from '@/assets'
 
 function CartPage() {
     // Defining state variables to handle data and process status
     // Getting the user data from the auth provider 
     const { user } = useAuth()
-    const {cart, setCart} = useCart()
+    const { cart, setCart } = useCart()
     const router = useRouter()
 
     useEffect(() => {
@@ -57,6 +57,7 @@ function CartPage() {
         return (
             <NavChildFooterLayout>
                 <main className='cart_container page_container flex_column_center'>
+                    <Image className='cart_image' src={emptyCartBg} alt={"Your wishlist"} title={"Your wishlist"} height={450} width={1200} quality={100} />
                     <h1 className='cart_heading section_title'>Your Cart</h1>
                     <p className='empty_cart_text'>Your cart is empty, <Link className={"empty_cart_link"} href={"/store"}>start adding treats</Link></p>
                 </main>

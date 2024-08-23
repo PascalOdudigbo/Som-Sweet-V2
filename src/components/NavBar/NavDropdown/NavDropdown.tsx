@@ -23,7 +23,7 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
   // Defining the users nav links
   const navLinksUser = [
     { name: 'My Wishlist', href: `/wishlist/${user?.id}` },
-    { name: 'My Orders', href: `/orders/${user?.id}` },
+    { name: 'My Orders', href: `/orders/` },
     { name: 'My Addresses', href: `/addresses/${user?.id}` },
     { name: 'My Account', href: `/account/${user?.id}` }
   ];

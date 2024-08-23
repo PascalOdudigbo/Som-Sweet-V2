@@ -89,7 +89,7 @@ function Wishlist() {
 
                 {
                     (wishlist && wishlist?.length > 0) && wishlist[0]?.product &&
-                    <Recommendations product={wishlist[0]?.product} />
+                    <Recommendations product={wishlist[(Math.floor(Math.random() * wishlist.length))]?.product ?? wishlist[0]?.product} />
                 }
 
             </main>

@@ -1,14 +1,29 @@
 .my_orders_container {
     width: 80%;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 0;
-  
+
+    .orders_image {
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
+      max-height: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      margin-top: 20px;
+      margin-bottom: 25px;
+      border-radius: 5px;
+  }
+
     .page_title {
-      font-family: var(--font-questrial);
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      font-size: clamp(28px, 5vw, 40px);
+      margin-bottom: 3rem;
       text-align: left;
+      color: var(--color-black);
+      font-family: var(--font-questrial);
       font-weight: lighter;
     }
   
