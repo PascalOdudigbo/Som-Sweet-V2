@@ -18,7 +18,7 @@ type CartItemProps = {
 
 function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
   // Getting the user data 
-  const {user, loadUserFromToken} = useAuth()
+  const { user, loadUserFromToken } = useAuth()
 
   // Router variable function to enable navigation
   const router = useRouter()
@@ -35,52 +35,53 @@ function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
     }
   }
 
-   // Defining a function to dynamially process the product description
-   const productDescription = useMemo(() => {
+  // Defining a function to dynamially process the product description
+  const productDescription = useMemo(() => {
     const description = (item?.product?.description?.length !== undefined) && (item?.product?.description?.length < 80) ? item?.product?.description : item?.product?.description?.slice(0, 100) + "..."
     return description
-}, [item?.product?.description]);
+  }, [item?.product?.description]);
 
-  const totalPrice = item.variation 
-    ? item.variation.price * item.quantity 
+  const totalPrice = item.variation
+    ? item.variation.price * item.quantity
     : item.product.basePrice * item.quantity
 
   return (
     <div className='cart_item_wrapper flex_column'>
       {
-                user?.wishlist && <Image
-                className={`wishlist_icon`}
-                src={isInWishlist(user?.wishlist, item?.product?.id) ? likeIconActive : likeIconInctive}
-                alt={item?.product?.name}
-                width={35}
-                height={35}
-                onClick={()=>{
-                    if (user.wishlist && isInWishlist(user?.wishlist, item?.product?.id)){
-                        removeFromWishlist(user.id, item?.product?.id)
-                        loadUserFromToken()
-                    }
-                    else{
-                        addToWishlist(user.id, item?.product?.id)
-                        loadUserFromToken()
-                    }
-
-                }}
-            />
+        user?.wishlist && <Image
+          className={`wishlist_icon`}
+          src={isInWishlist(user?.wishlist, item?.product?.id) ? likeIconActive : likeIconInctive}
+          alt={item?.product?.name}
+          width={35}
+          height={35}
+          onClick={() => {
+            if (user.wishlist && isInWishlist(user?.wishlist, item?.product?.id)) {
+              removeFromWishlist(user.id, item?.product?.id)
+              loadUserFromToken()
             }
-      <Image 
-        className='product_image' 
+            else {
+              addToWishlist(user.id, item?.product?.id)
+              loadUserFromToken()
+            }
+
+          }}
+        />
+      }
+      <Image
+        className='product_image'
         src={item?.product?.images && item?.product?.images[0]?.imageUrl || ''}
         alt={item.product.name}
         width={400}
         height={225}
-        onClick={()=>{router.push(`/product/${item?.product?.id}`)}}
+        onClick={() => { router.push(`/product/${item?.product?.id}`) }}
+        priority
       />
       <div className='item_details flex_column'>
         <div className='name_and_price_wrapper flex_column'>
           <h3 className='item_name'>{item.product.name}</h3>
           <p className='item_custom_text'>{productDescription}</p>
           <p className='item_price'>£{totalPrice.toFixed(2)}</p>
-         
+
         </div>
         {item.variation && (
           <p className='item_variation'>Variation: {item.variation.name}</p>

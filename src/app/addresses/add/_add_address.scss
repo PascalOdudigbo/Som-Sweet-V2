@@ -1,0 +1,59 @@
+.add_address_main_container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  
+    .add_address_heading {
+      font-size: clamp(22px, 5vw, 40px);
+      margin-bottom: 3rem;
+      text-align: left;
+      color: var(--color-black);
+      font-family: var(--font-questrial);
+      font-weight: lighter;
+    }
+  
+    .add_address_image {
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
+      max-height: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      margin-top: 20px;
+      margin-bottom: 25px;
+      border-radius: 5px;
+    }
+  
+    .add_address_content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+  
+      .add_address_form {
+        background-color: var(--color-white);
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+        .add_address_button {
+          margin-top: 1rem;
+          width: 100%;
+  
+          &:disabled {
+            background-color: var(--color-grey);
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .add_address_main_container {
+      width: 95%;
+    }
+  }

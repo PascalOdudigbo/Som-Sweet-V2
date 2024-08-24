@@ -26,6 +26,39 @@ export async function getUserAddresses(userId: number): Promise<AddressType[]> {
   }
 }
 
+// A function that fetches a specific address by ID for a given user
+export async function getAddressById(userId: number, addressId: number): Promise<AddressType> {
+  try {
+    // Get the authentication token from local storage
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    // Make a GET request to the address API endpoint
+    const response = await fetch(`/api/addresses/${userId}/${addressId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    // Check if the response is ok (status in the range 200-299)
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch address');
+    }
+
+    // Parse and return the response JSON
+    return response.json();
+  } catch (error) {
+    // Log the error and show a toast notification
+    console.error('Error fetching address:', error);
+    showToast('error', 'Failed to fetch address');
+    throw error;
+  }
+}
+
+
 // A function to create an address
 export async function createAddress(address: Omit<AddressType, 'id'>): Promise<AddressType> {
   try {
@@ -102,7 +135,7 @@ export async function deleteAddress(userId: number, id: number): Promise<void> {
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to delete address');
     }
-    showToast('success', 'Address deleted successfully');
+    showToast('success', 'Address deleted successfully!');
   } catch (error) {
     console.error('Error deleting address:', error);
     showToast('error', 'Failed to delete address');

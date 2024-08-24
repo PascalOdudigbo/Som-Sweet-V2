@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { NavChildFooterLayout, FormInput, Loading, Dropdown, MinimizableLayout } from '@/components'
+import { NavChildFooterLayout, Loading, Dropdown, MinimizableLayout } from '@/components'
 import { useAuth } from '@/components/contexts/AuthProvider'
 import { useCart } from '@/components/contexts/CartProvider'
 import { getUserAddresses, createAddress } from '@/utils/addressManagement'
@@ -15,6 +15,7 @@ import { createOrder } from '@/utils/orderManagement'
 import Image from 'next/image'
 import { checkoutBg } from '@/assets'
 import { EmailDetails, sendEmail } from '@/utils/emailJS'
+import dynamic from 'next/dynamic'
 
 // Defining the Simple payment intent type 
 type SimplePaymentIntent = {
@@ -75,6 +76,25 @@ function CheckoutForm({ handlePaymentSuccess }: CheckoutFormProps) {
       </button>
     </form>
   )
+}
+
+const FormInput = dynamic(
+  () => import('@/components/FormInput/FormInput'),
+  { ssr: false }
+)
+
+function ClientOnlyForm({ children }: { children: React.ReactNode }) {
+  const [hasMounted, setHasMounted] = useState(false)
+
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  if (!hasMounted) {
+    return null
+  }
+
+  return <>{children}</>
 }
 
 // Main Checkout component
@@ -243,8 +263,8 @@ function Checkout() {
         ${cart?.items.some(item => item.customText) ? `
         Custom Text Instructions:
         ${cart?.items.filter(item => item.customText).map(item =>
-                  `- ${item.product.name}: "${item.customText}"`
-                ).join('\n')}
+          `- ${item.product.name}: "${item.customText}"`
+        ).join('\n')}
         ` : ''}
 
         Shipping Address:
@@ -278,7 +298,7 @@ function Checkout() {
   return (
     <NavChildFooterLayout>
       <main className="checkout_main_container page_container flex_column">
-        <Image className='checkout_image' src={checkoutBg} alt={"Checkout"} title={"Checkout"} height={450} width={1200} quality={100} />
+        <Image className='checkout_image' src={checkoutBg} alt={"Checkout"} title={"Checkout"} height={450} width={1200} quality={100} priority/>
         <h1 className='section_title checkout_heading'>Checkout</h1>
         <div className="checkout_content">
           {/* Address Section */}
@@ -293,77 +313,81 @@ function Checkout() {
                 required={true}
               />
             )}
-            <MinimizableLayout title='Add a New Address' isActiveInit={false}>
-              {/* <h3 className='section_title'></h3> */}
-              {/* Address input fields */}
-              <FormInput
-                label="Address Line 1"
-                autoComplete="address-line1"
-                inputValue={newAddress.addressLine1 || ""}
-                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNewAddress({ ...newAddress, addressLine1: e.target.value })
-                }}
-                inputType='text'
-                readonly={false}
-                required={true}
-              />
-              <FormInput
-                label="Address Line 2"
-                autoComplete="address-line2"
-                inputValue={newAddress.addressLine2 || ""}
-                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNewAddress({ ...newAddress, addressLine2: e.target.value })
-                }}
-                inputType='text'
-                readonly={false}
-                required={false}
-              />
-              <FormInput
-                label="City"
-                autoComplete="city"
-                inputValue={newAddress.city || ""}
-                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNewAddress({ ...newAddress, city: e.target.value })
-                }}
-                inputType='text'
-                readonly={false}
-                required={true}
-              />
-              <FormInput
-                label="State"
-                autoComplete="state"
-                inputValue={newAddress.state || ""}
-                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNewAddress({ ...newAddress, state: e.target.value })
-                }}
-                inputType='text'
-                readonly={false}
-                required={true}
-              />
-              <FormInput
-                label="Postal Code"
-                autoComplete="postal-code"
-                inputValue={newAddress.postalCode || ""}
-                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNewAddress({ ...newAddress, postalCode: e.target.value })
-                }}
-                inputType='text'
-                readonly={false}
-                required={true}
-              />
-              <FormInput
-                label="Country"
-                autoComplete="country"
-                inputValue={newAddress.country || ""}
-                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNewAddress({ ...newAddress, country: e.target.value })
-                }}
-                inputType='text'
-                readonly={false}
-                required={true}
-              />
-              <button className='custom_button' onClick={handleAddNewAddress}>Add New Address</button>
-            </MinimizableLayout>
+
+            <ClientOnlyForm>
+              <MinimizableLayout title='Add a New Address' isActiveInit={false}>
+                {/* <h3 className='section_title'></h3> */}
+                {/* Address input fields */}
+                <FormInput
+                  label="Address Line 1"
+                  autoComplete="address-line1"
+                  inputValue={newAddress.addressLine1 || ""}
+                  onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewAddress({ ...newAddress, addressLine1: e.target.value })
+                  }}
+                  inputType='text'
+                  readonly={false}
+                  required={true}
+                />
+                <FormInput
+                  label="Address Line 2"
+                  autoComplete="address-line2"
+                  inputValue={newAddress.addressLine2 || ""}
+                  onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewAddress({ ...newAddress, addressLine2: e.target.value })
+                  }}
+                  inputType='text'
+                  readonly={false}
+                  required={false}
+                />
+                <FormInput
+                  label="City"
+                  autoComplete="city"
+                  inputValue={newAddress.city || ""}
+                  onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewAddress({ ...newAddress, city: e.target.value })
+                  }}
+                  inputType='text'
+                  readonly={false}
+                  required={true}
+                />
+                <FormInput
+                  label="State"
+                  autoComplete="state"
+                  inputValue={newAddress.state || ""}
+                  onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewAddress({ ...newAddress, state: e.target.value })
+                  }}
+                  inputType='text'
+                  readonly={false}
+                  required={true}
+                />
+                <FormInput
+                  label="Postal Code"
+                  autoComplete="postal-code"
+                  inputValue={newAddress.postalCode || ""}
+                  onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewAddress({ ...newAddress, postalCode: e.target.value })
+                  }}
+                  inputType='text'
+                  readonly={false}
+                  required={true}
+                />
+                <FormInput
+                  label="Country"
+                  autoComplete="country"
+                  inputValue={newAddress.country || ""}
+                  onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewAddress({ ...newAddress, country: e.target.value })
+                  }}
+                  inputType='text'
+                  readonly={false}
+                  required={true}
+                />
+                <button className='custom_button' onClick={handleAddNewAddress}>Add New Address</button>
+              </MinimizableLayout>
+            </ClientOnlyForm>
+
           </section>
 
           {/* Order Summary Section */}

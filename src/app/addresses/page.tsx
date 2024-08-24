@@ -40,7 +40,6 @@ function Addresses() {
       try {
         await deleteAddress(user.id, addressId)
         setAddresses(addresses.filter(address => address.id !== addressId))
-        showToast('success', 'Address deleted successfully')
       } catch (error) {
         console.error('Failed to delete address:', error)
         showToast('error', 'Failed to delete address')
@@ -53,9 +52,9 @@ function Addresses() {
   return (
     <NavChildFooterLayout>
       <main className='addresses_container page_container'>
-        <Image className='addresses_image' src={addressesBg} alt={"Your addresses"} title={"Your addresses"} height={450} width={1200} quality={100} />
+        <Image className='addresses_image' src={addressesBg} alt={"Your addresses"} title={"Your addresses"} height={450} width={1200} quality={100} priority/>
 
-        <div className='header_container'>
+        <div className='header_container flex_row_center'>
           <h1 className='page_title section_title'>Your Addresses</h1>
           <Link href="/addresses/add" className='add_address_button border_button_void'>Add Address</Link>
         </div>
@@ -70,7 +69,7 @@ function Addresses() {
               <p>{address.city}, {address.state} {address.postalCode}</p>
               <p>{address.country}</p>
               <div className='flex_row_center buttons_container'>
-                <Link href={`/edit-address/${address.id}`} className='edit_address_button'>Edit</Link>
+                <Link href={`/addresses/edit/${address.id}`} className='edit_address_button'>Edit</Link>
                 {address.orders && address.orders.length === 0 && (
                   <button onClick={() => { handleDeleteAddress(address.id) }} className='delete_address_button'>Delete</button>
                 )}
