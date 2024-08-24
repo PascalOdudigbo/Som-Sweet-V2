@@ -56,25 +56,10 @@
 /* Media Queries */
 @media screen and (max-width: 480px) {
   .image_title_button_container {
-
-    .shop_offers_button {
-      font-size: 11px;
-      padding: 6px 8px;
-    }
   }
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  .image_title_button_container {
-
-    .shop_offers_button {
-      font-size: 12px;
-      padding: 8px 12px;
-    }
-  }
-}
-
-
+@media screen and (min-width: 481px) and (max-width: 768px) {}
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {}
 

@@ -30,7 +30,7 @@ function CategoryRow({index, category, setCategories }: CategoryRowProps) {
         const response = await fetch(`/api/categories/${category.id}`, {
           method: 'DELETE',
         });
-        console.log(response)
+        
         if (response.ok) {
           const deletedImage = await deleteCloudinaryImage(category.imagePublicId)
           if (deletedImage){

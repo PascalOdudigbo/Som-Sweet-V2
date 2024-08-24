@@ -68,7 +68,7 @@ function ForgotPassword() {
       if (user) {
         showToast('info', 'User data found!');
         const emailDetails: EmailDetails = {
-          emailTitle: `Som' Sweet: Account Recovery`,
+          emailTitle: `Account Recovery`,
           username: user.username,
           emailTo: user.email,
           notice: `This email was intended for ${user.username}, if you're not the intended recipient please disregerd or delete it`,

@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Clear the user's cart after successful order creation
-    await prisma.cartItem.deleteMany({ where: { cartId: cart.id } });
+    // await prisma.cartItem.deleteMany({ where: { cartId: cart.id } });
 
     // Return the created order
     return NextResponse.json(order);

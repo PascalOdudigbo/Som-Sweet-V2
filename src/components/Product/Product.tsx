@@ -24,7 +24,6 @@ function Product({ product }: Props) {
     const router = useRouter();
     // Getting the user data 
     const {user, loadUserFromToken} = useAuth()
-    console.log(product)
 
     return (
         <div className='product_main_container'>

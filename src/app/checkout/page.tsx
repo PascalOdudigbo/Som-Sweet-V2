@@ -14,6 +14,7 @@ import './_checkout.scss'
 import { createOrder } from '@/utils/orderManagement'
 import Image from 'next/image'
 import { checkoutBg } from '@/assets'
+import { EmailDetails, sendEmail } from '@/utils/emailJS'
 
 // Defining the Simple payment intent type 
 type SimplePaymentIntent = {
@@ -175,6 +176,95 @@ function Checkout() {
       const createdOrder = await createOrder(orderData);
 
       clearCart()
+      // Setting up confirmation email
+      const emailDetails: EmailDetails = {
+        emailTitle: `Som' Sweet: Order Confirmation #${createdOrder.id}`,
+        username: user.username,
+        emailTo: user.email,
+        notice: `This email was intended for ${user.username}. If you're not the intended recipient, please disregard or delete it.`,
+        emailBody: `Dear ${user.username.split(" ")[0]},
+      
+      Thank you for your order with Som' Sweet, the best bakery in the UK! We're excited to confirm that your order has been received and is being processed.
+      
+      Order Details:
+      Order Number: #${createdOrder.id}
+      Order Date: ${new Date(createdOrder.createdAt).toLocaleString()}
+      Total Amount: £${createdOrder.total.toFixed(2)}
+      
+      Items Ordered:
+      ${cart?.items.map(item =>
+          `- ${item.product.name} ${item.variation ? `(${item.variation.name})` : ''} x ${item.quantity} - £${(item.variation ? (item.variation.price * item.quantity).toFixed(2) : (item.product.basePrice * item.quantity).toFixed(2))}`
+        ).join('\n')}
+      
+      Shipping Address:
+      ${selectedAddress.addressLine1}
+      ${selectedAddress.addressLine2 ? selectedAddress.addressLine2 + '\n' : ''}
+      ${selectedAddress.city}, ${selectedAddress.state} ${selectedAddress.postalCode}
+      ${selectedAddress.country}
+      
+      Estimated Delivery: Within 2-3 business days
+      
+      If you have any questions about your order, please don't hesitate to contact our customer service team.
+      
+      Thank you again for choosing Som' Sweet. We hope you enjoy your delicious treats!
+      
+      Best regards,
+      The Som' Sweet Team`,
+        buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/order/${createdOrder.id}`,
+        buttonText: "View Order Details"
+      };
+      // Sending the confirmation email to the customer
+      await sendEmail(emailDetails, "success", "Order confirmation email sent!");
+
+      // Setting up store notification email
+      const storeNotificationDetails: EmailDetails = {
+        emailTitle: `New Order Alert: Order #${createdOrder.id}`,
+        username: "Som' Sweet Team",
+        emailTo: "oinkoinkbakeryke@gmail.com",
+        notice: "This is an automated order notification. Please process this order according to our standard procedures.",
+        emailBody: `Dear Som' Sweet Team,
+
+        A new order has been placed and requires your attention.
+
+        Order Details:
+        Order Number: #${createdOrder.id}
+        Order Date: ${new Date(createdOrder.createdAt).toLocaleString()}
+        Total Amount: £${createdOrder.total.toFixed(2)}
+
+        Customer Information:
+        Name: ${user.username}
+        Email: ${user.email}
+
+        Items Ordered:
+        ${cart?.items.map(item =>
+          `- ${item.product.name} ${item.variation ? `(${item.variation.name})` : ''} x ${item.quantity} - £${(item.variation ? (item.variation.price * item.quantity).toFixed(2) : (item.product.basePrice * item.quantity).toFixed(2))}`
+        ).join('\n')}
+
+        ${cart?.items.some(item => item.customText) ? `
+        Custom Text Instructions:
+        ${cart?.items.filter(item => item.customText).map(item =>
+                  `- ${item.product.name}: "${item.customText}"`
+                ).join('\n')}
+        ` : ''}
+
+        Shipping Address:
+        ${selectedAddress.addressLine1}
+        ${selectedAddress.addressLine2 ? selectedAddress.addressLine2 + '\n' : ''}
+        ${selectedAddress.city}, ${selectedAddress.state} ${selectedAddress.postalCode}
+        ${selectedAddress.country}
+
+        Please process this order promptly and ensure it's prepared for shipping within our standard timeframe.
+
+        If you have any questions or concerns about this order, please contact the customer service team.
+
+        Best regards,
+        Som' Sweet Automated Order System`,
+        buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/admin/orders/${createdOrder.id}`,
+        buttonText: "View Order Details"
+      };
+
+      await sendEmail(storeNotificationDetails, "success", "Store notification email sent!");
+
       showToast('success', 'Order placed successfully')
       router.push(`/order-confirmation/${createdOrder.id}`)
     } catch (error) {
@@ -188,7 +278,7 @@ function Checkout() {
   return (
     <NavChildFooterLayout>
       <main className="checkout_main_container page_container flex_column">
-      <Image className='checkout_image' src={checkoutBg} alt={"Checkout"} title={"Checkout"} height={450} width={1200} quality={100} />
+        <Image className='checkout_image' src={checkoutBg} alt={"Checkout"} title={"Checkout"} height={450} width={1200} quality={100} />
         <h1 className='section_title checkout_heading'>Checkout</h1>
         <div className="checkout_content">
           {/* Address Section */}
@@ -204,75 +294,75 @@ function Checkout() {
               />
             )}
             <MinimizableLayout title='Add a New Address' isActiveInit={false}>
-            {/* <h3 className='section_title'></h3> */}
-            {/* Address input fields */}
-            <FormInput
-              label="Address Line 1"
-              autoComplete="address-line1"
-              inputValue={newAddress.addressLine1 || ""}
-              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setNewAddress({ ...newAddress, addressLine1: e.target.value })
-              }}
-              inputType='text'
-              readonly={false}
-              required={true}
-            />
-            <FormInput
-              label="Address Line 2"
-              autoComplete="address-line2"
-              inputValue={newAddress.addressLine2 || ""}
-              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setNewAddress({ ...newAddress, addressLine2: e.target.value })
-              }}
-              inputType='text'
-              readonly={false}
-              required={false}
-            />
-            <FormInput
-              label="City"
-              autoComplete="city"
-              inputValue={newAddress.city || ""}
-              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setNewAddress({ ...newAddress, city: e.target.value })
-              }}
-              inputType='text'
-              readonly={false}
-              required={true}
-            />
-            <FormInput
-              label="State"
-              autoComplete="state"
-              inputValue={newAddress.state || ""}
-              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setNewAddress({ ...newAddress, state: e.target.value })
-              }}
-              inputType='text'
-              readonly={false}
-              required={true}
-            />
-            <FormInput
-              label="Postal Code"
-              autoComplete="postal-code"
-              inputValue={newAddress.postalCode || ""}
-              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setNewAddress({ ...newAddress, postalCode: e.target.value })
-              }}
-              inputType='text'
-              readonly={false}
-              required={true}
-            />
-            <FormInput
-              label="Country"
-              autoComplete="country"
-              inputValue={newAddress.country || ""}
-              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setNewAddress({ ...newAddress, country: e.target.value })
-              }}
-              inputType='text'
-              readonly={false}
-              required={true}
-            />
-            <button className='custom_button' onClick={handleAddNewAddress}>Add New Address</button>
+              {/* <h3 className='section_title'></h3> */}
+              {/* Address input fields */}
+              <FormInput
+                label="Address Line 1"
+                autoComplete="address-line1"
+                inputValue={newAddress.addressLine1 || ""}
+                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNewAddress({ ...newAddress, addressLine1: e.target.value })
+                }}
+                inputType='text'
+                readonly={false}
+                required={true}
+              />
+              <FormInput
+                label="Address Line 2"
+                autoComplete="address-line2"
+                inputValue={newAddress.addressLine2 || ""}
+                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNewAddress({ ...newAddress, addressLine2: e.target.value })
+                }}
+                inputType='text'
+                readonly={false}
+                required={false}
+              />
+              <FormInput
+                label="City"
+                autoComplete="city"
+                inputValue={newAddress.city || ""}
+                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNewAddress({ ...newAddress, city: e.target.value })
+                }}
+                inputType='text'
+                readonly={false}
+                required={true}
+              />
+              <FormInput
+                label="State"
+                autoComplete="state"
+                inputValue={newAddress.state || ""}
+                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNewAddress({ ...newAddress, state: e.target.value })
+                }}
+                inputType='text'
+                readonly={false}
+                required={true}
+              />
+              <FormInput
+                label="Postal Code"
+                autoComplete="postal-code"
+                inputValue={newAddress.postalCode || ""}
+                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNewAddress({ ...newAddress, postalCode: e.target.value })
+                }}
+                inputType='text'
+                readonly={false}
+                required={true}
+              />
+              <FormInput
+                label="Country"
+                autoComplete="country"
+                inputValue={newAddress.country || ""}
+                onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNewAddress({ ...newAddress, country: e.target.value })
+                }}
+                inputType='text'
+                readonly={false}
+                required={true}
+              />
+              <button className='custom_button' onClick={handleAddNewAddress}>Add New Address</button>
             </MinimizableLayout>
           </section>
 

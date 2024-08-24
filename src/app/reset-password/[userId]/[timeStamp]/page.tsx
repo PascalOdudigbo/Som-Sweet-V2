@@ -85,7 +85,6 @@ function ResetPassword() {
             
             // Using the account recovery function
             const user = await resetPassword(data);
-            console.log(user)
             if (user) {
                 showToast('info', 'Password reset successful!');
                 const emailDetails: EmailDetails = {

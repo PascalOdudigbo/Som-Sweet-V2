@@ -35,7 +35,6 @@ function Store() {
         setFilteredProducts(fetchedProducts);
         setCategories(fetchedCategories);
         setDiscounts(fetchedDiscounts);
-        console.log(fetchedDiscounts)
         // If offers exist then display the first one
         if (fetchedDiscounts.length > 0) {
           setTargetDiscount(fetchedDiscounts[0]);
