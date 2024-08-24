@@ -51,7 +51,6 @@
       h3 {
         font-family: var(--font-questrial);
         margin-bottom: 1rem;
-        // font-weight: lighter;
       }
 
       .custom_button {
@@ -69,6 +68,7 @@
 
       p {
         font-family: var(--font-questrial);
+        font-size: clamp(14px, 2.5vw, 18px);
       }
     }
 

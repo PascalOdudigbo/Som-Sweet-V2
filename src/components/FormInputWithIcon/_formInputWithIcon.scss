@@ -37,7 +37,7 @@
         .input_textbox{
             width: 100%;
             height: auto;
-            font-size: 18px;
+            font-size: clamp(14px, 2.5vw, 18px);
             font-family: var(--font-openSans);
             color: var(--color-black);
             line-height: 24px;

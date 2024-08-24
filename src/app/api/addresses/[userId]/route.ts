@@ -26,6 +26,9 @@ export async function GET(
     // Fetch addresses for the user from the database
     const addresses = await prisma.address.findMany({
       where: { userId },
+      include:{
+        orders: true
+      }
     });
 
     // Return the addresses as JSON response
