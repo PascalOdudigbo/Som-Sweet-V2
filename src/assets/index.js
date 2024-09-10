@@ -36,6 +36,8 @@ export {default as checkoutBg} from "./images/checkoutBg.jpeg"
 export {default as emptyCartBg} from "./images/emptyCartBg.png"
 export {default as addressesBg} from "./images/addressesBg.png"
 export {default as addressBg} from "./images/addressBg.png"
+export {default as profileBg} from "./images/profileBg.png"
+
 
 
 

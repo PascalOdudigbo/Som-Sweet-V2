@@ -46,6 +46,11 @@
         }
     }
 
+    .read_only_input {
+        background-color: var(--color-grey);
+        cursor: not-allowed;
+    }
+
     // For Firefox
     scrollbar-width: thin;
     scrollbar-color: var(--color-periwinkle) var(--color-white);
@@ -294,21 +299,14 @@ a {
     }
 }
 
+
+
 /* Media Queries */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 480px) {}
 
-    
-}
+@media screen and (min-width: 481px) and (max-width: 768px) {}
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-
-    
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-
-   
-}
+@media screen and (min-width: 769px) and (max-width: 1024px) {}
 
 @media screen and (min-width: 1025px) {
     /* Large laptop and desktop styles */

@@ -25,12 +25,13 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
     { name: 'My Wishlist', href: `/wishlist/${user?.id}` },
     { name: 'My Orders', href: `/orders/` },
     { name: 'My Addresses', href: `/addresses/` },
-    { name: 'My Account', href: `/account/${user?.id}` }
+    { name: 'My Account', href: `/account-management` }
   ];
 
   // Defining the admin nav links
   const navLinksAdmin = [
     { name: 'Dashboard', href: '/admin/dashboard' },
+    { name: 'My Account', href: `/account-management` }
   ];
 
   // Defining the default nav links

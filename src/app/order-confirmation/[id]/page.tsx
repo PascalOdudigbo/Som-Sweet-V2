@@ -43,7 +43,7 @@ function OrderConfirmation() {
 
   return (
     <NavChildFooterLayout>
-      <main className='order_confirmation_container'>
+      <main className='order_confirmation_container page_container'>
         <h1 className='page_title'>Order Confirmation</h1>
         <div className='order_details'>
           <h2>Order #{order.id}</h2>
