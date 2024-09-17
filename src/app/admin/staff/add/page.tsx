@@ -8,6 +8,7 @@ import { createStaff } from '@/utils/staffManagement'
 import { showToast } from '@/utils/toast'
 import './_add_staff.scss'
 import { getAllRoles } from '@/utils/roleManagement'
+import { EmailDetails, sendEmail } from '@/utils/emailJS'
 
 function AddStaff() {
   // Setting up state variables for dynamic data management
@@ -40,6 +41,48 @@ function AddStaff() {
     // Calling the fetchRoles function
     fetchRoles()
   }, [])
+
+  const informNewStaffMember = async (staffMember: UserType) => {
+    const emailDetails: EmailDetails = {
+      emailTitle: "Welcome to Som' Sweet - Your Staff Account Has Been Created",
+      username: staffMember.username,
+      emailTo: staffMember.email,
+      notice: "This email contains important information about your new staff account. Please read it carefully.",
+      emailBody: `Dear ${staffMember.username},
+
+We're excited to welcome you to the Som' Sweet team! Your staff account has been successfully created.
+
+Account Details:
+Email: ${staffMember.email}
+Temporary Password: ${staff.password}
+
+For security reasons, we strongly encourage you to change your password after your initial login. You can do this by following these steps:
+
+1. Log in to your account using the provided email and temporary password.
+2. Navigate to the Account Management section.
+3. Look for the "Change Password" option.
+4. Enter your current (temporary) password and then set a new, strong password.
+
+Remember to choose a password that is unique and not used for any other accounts. A strong password typically includes a mix of uppercase and lowercase letters, numbers, and special characters.
+
+If you have any questions or need assistance, please don't hesitate to contact our IT support team.
+
+Welcome aboard, and we look forward to working with you!
+
+Best regards,
+The Som' Sweet Management Team`,
+      buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/signin`,
+      buttonText: "Log In to Your Account"
+    };
+
+    try {
+      await sendEmail(emailDetails, "success", "Welcome email sent to new staff member!");
+    } catch (error) {
+      console.error('Failed to send welcome email:', error);
+      showToast('error', 'Failed to send welcome email to the new staff member.');
+    }
+  };
+
   // On Click handler for the add staff functionality
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -53,6 +96,8 @@ function AddStaff() {
       showToast('success', `${createdStaff.username} staff member added successfully!`)
       // Navigating back to staff
       router.push('/admin/staff')
+      // Call the function to inform the new staff member
+      await informNewStaffMember(createdStaff);
     } catch (error) {
       // In the eventuality of an error occuring
       console.error('Failed to add staff:', error)

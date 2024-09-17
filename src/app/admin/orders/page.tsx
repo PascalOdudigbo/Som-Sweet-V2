@@ -13,7 +13,7 @@ function OrdersManagement() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const [ordersPerPage] = useState(5)
+  const [ordersPerPage] = useState(4)
 
   useEffect(() => {
     fetchOrders()

@@ -14,7 +14,7 @@ function Products() {
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1)
-    const [productsPerPage] = useState(5)
+    const [productsPerPage] = useState(4)
 
     useEffect(() => {
         // Fetching all the products data from the database

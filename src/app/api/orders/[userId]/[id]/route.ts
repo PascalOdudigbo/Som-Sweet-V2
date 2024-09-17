@@ -27,12 +27,14 @@ export async function GET(
         id: parseInt(params.id),
         userId: parseInt(params.userId)
       },
-      include: { orderItems: {
-        include: {
-          product: true,
-          variation: true,
+      include: {
+        orderItems: {
+          include: {
+            product: true,
+            variation: true,
+          }
         }
-      } }
+      }
     });
 
     // If the order doesn't exist, return a 404 error

@@ -198,7 +198,7 @@ function Checkout() {
       clearCart()
       // Setting up confirmation email
       const emailDetails: EmailDetails = {
-        emailTitle: `Som' Sweet: Order Confirmation #${createdOrder.id}`,
+        emailTitle: `Order Confirmation #${createdOrder.id}`,
         username: user.username,
         emailTo: user.email,
         notice: `This email was intended for ${user.username}. If you're not the intended recipient, please disregard or delete it.`,
@@ -230,7 +230,7 @@ function Checkout() {
       
       Best regards,
       The Som' Sweet Team`,
-        buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/order/${createdOrder.id}`,
+        buttonLink: `${process.env.NEXT_PUBLIC_BASE_URL}/order-confirmation/${createdOrder.id}`,
         buttonText: "View Order Details"
       };
       // Sending the confirmation email to the customer
