@@ -59,7 +59,7 @@ Temporary Password: ${staff.password}
 For security reasons, we strongly encourage you to change your password after your initial login. You can do this by following these steps:
 
 1. Log in to your account using the provided email and temporary password.
-2. Navigate to the Account Management section.
+2. Navigate to the "My Account" page in the navigation bar dropdown.
 3. Look for the "Change Password" option.
 4. Enter your current (temporary) password and then set a new, strong password.
 
@@ -76,7 +76,7 @@ The Som' Sweet Management Team`,
     };
 
     try {
-      await sendEmail(emailDetails, "success", "Welcome email sent to new staff member!");
+      await sendEmail(emailDetails, "info", "Welcome email sent to new staff member!");
     } catch (error) {
       console.error('Failed to send welcome email:', error);
       showToast('error', 'Failed to send welcome email to the new staff member.');

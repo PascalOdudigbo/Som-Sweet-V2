@@ -48,10 +48,11 @@ function SignIn() {
 
   useEffect(() => {
     setMounted(true);
-    // NAvigating already logged-in users to their landing pages
+    // Navigating already logged-in users to their landing pages
     if (user) {
       user.role?.name.toLowerCase() === "customer" && router.push("/store");
       user.role?.name.toLowerCase() === "administrator" && router.push("/admin/dashboard/")
+      user.role?.name.toLowerCase().includes("service") && router.push("/service-professional/dashboard/")
     }
   }, [user, router]);
 

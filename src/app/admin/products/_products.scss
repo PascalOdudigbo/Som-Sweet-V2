@@ -19,16 +19,7 @@
     }
 
     .search_wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        width: 97%;
-        height: 90px;
-        padding: 0.2em 1em;
-        background-color: var(--color-purple);
-        margin-left: auto;
-        margin-right: auto;
+        margin-bottom: 1rem;
     }
 
     .products_table {
