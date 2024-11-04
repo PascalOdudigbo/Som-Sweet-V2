@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Badge, Tooltip } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { IconContext, IconType } from 'react-icons'
@@ -9,6 +9,7 @@ import { RiRefund2Fill } from "react-icons/ri";
 import { MdReviews } from 'react-icons/md'
 import "./_layout.scss"
 import { NavBar } from '@/components'
+import { ServiceDashboardData } from '@/utils/serviceProviderDashboardTypes'
 
 interface NavLinkType {
   title: string;
@@ -16,12 +17,6 @@ interface NavLinkType {
   route: string;
   badgeContent: number | string;
 }
-
-const navLinks: NavLinkType[] = [
-  { title: "Dashboard", icon: AiFillDashboard, route: "/service-professional/dashboard", badgeContent: '!' },
-  { title: "Refunds Management", icon: RiRefund2Fill, route: "/service-professional/refunds", badgeContent: 0 },
-  { title: "Order Management", icon: MdReviews, route: "/admin/orders", badgeContent: 0 },
-];
 
 interface NavLinkProps extends NavLinkType {
   onClick: () => void;
@@ -44,8 +39,71 @@ interface NavigationMenuProps {
 const NavigationMenu: React.FC<NavigationMenuProps> = ({ className }) => {
   const navigate = useRouter();
 
+  // State to hold all the dashboard data
+  const [dashboardData, setDashboardData] = useState<ServiceDashboardData>({
+    customers: null,
+    orders: null,
+    refunds: null,
+    recentActivity: null,
+  });
+
+  useEffect(() => {
+    // Function to fetch all the data 
+    async function fetchDashboardData() {
+      try {
+        // Fetch data from API endpoints
+        const [
+          customersResponse,
+          ordersResponse,
+          refundsResponse,
+          recentActivityResponse
+        ] = await Promise.all([
+          fetch('/api/service/dashboard/customer'),
+          fetch('/api/service/dashboard/order'),
+          fetch('/api/service/dashboard/refund'),
+          fetch('/api/service/dashboard/recentActivity')
+        ]);
+
+        // Parse JSON responses
+        const [
+          customers,
+          orders,
+          refunds,
+          recentActivity
+        ] = await Promise.all([
+          customersResponse.json(),
+          ordersResponse.json(),
+          refundsResponse.json(),
+          recentActivityResponse.json()
+        ]);
+
+        // Update state with fetched data
+        setDashboardData({
+          customers,
+          orders,
+          refunds,
+          recentActivity
+        });
+      } catch (error) {
+        console.error('Failed to fetch dashboard data:', error);
+        // Handle error (show error message to user)
+      }
+    }
+
+    fetchDashboardData();
+  }, []);
+
+
+  const navLinks: NavLinkType[] = [
+    { title: "Dashboard", icon: AiFillDashboard, route: "/service-professional/dashboard", badgeContent: '!' },
+    { title: "Refunds Management", icon: RiRefund2Fill, route: "/service-professional/refunds", badgeContent: 0 },
+    { title: "Order Management", icon: MdReviews, route: "/service-professional/orders", badgeContent: 0 },
+  ];
+
+
   return (
     <section className={className}>
+
       {navLinks.map((link, index) => (
         <NavLink
           key={index}

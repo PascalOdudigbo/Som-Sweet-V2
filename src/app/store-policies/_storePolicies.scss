@@ -1,4 +1,4 @@
-.wishlist_main_container {
+.policies_main_container {
     padding: 40px 20px;
     max-width: 1200px;
     width: 90%;
@@ -6,7 +6,7 @@
     margin-bottom: 30px;
     margin: 0 auto;
 
-    .wishlist_image {
+    .policies_image {
         width: 100%;
         max-width: 1200px;
         height: auto;
@@ -20,7 +20,7 @@
         border-radius: 5px;
     }
 
-    .wishlist_page_title {
+    .policies_page_title {
         font-size: clamp(24px, 4vw, 40px);
         text-align: center;
         margin-bottom: 30px;
@@ -28,19 +28,19 @@
         font-weight: lighter;
     }
 
-    .empty_wishlist_text {
+    .empty_policies_text {
         font-size: clamp(14px, 2.5vw, 28px);
         text-align: center;
         font-family: var(--font-questrial);
         color: var(--color-dark_grey);
 
-        .empty_wishlist_link {
+        .empty_policies_link {
             color: var(--color-cerulean);
             text-decoration: underline;
         }
     }
 
-    .wishlist_page_text {
+    .policies_page_text {
         font-family: var(--font-questrial);
         font-size: clamp(14px, 2.5vw, 24px);
         text-align: center;
@@ -48,25 +48,17 @@
         margin: 0 auto 40px;
     }
 
-    .discount_duration {
-        color: var(--color-red);
-        font-size: clamp(12px, 2.5vw, 22px);
-        margin-bottom: 20px;
+    .minimizable_section_container{
+        margin-top: 20px;
     }
 
-    .products_container {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        justify-content: center;
-    }
+   
 
 }
 
 /* Media Queries */
 @media screen and (max-width: 767px) {
-    .wishlist_main_container {
+    .policies_main_container {
         padding: 30px 15px;
 
         .products_container {
@@ -77,7 +69,7 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-    .wishlist_main_container {
+    .policies_main_container {
         .products_container {
             grid-template-columns: repeat(2, 1fr);
         }
@@ -85,7 +77,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .wishlist_main_container {
+    .policies_main_container {
         .products_container {
             grid-template-columns: repeat(3, 1fr);
         }

@@ -39,7 +39,21 @@
         margin-bottom: 20px;
         max-height: 500px;
         text-align: left;
+        overflow-y: scroll;
+       
     }
+
+    .preformatted_text{
+        font-family: var(--font-questrial);
+        font-size: clamp(12px, 2.5vw, 20px);
+        width: 100%;
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        max-width: 100%;   
+    }
+
 
 
 }

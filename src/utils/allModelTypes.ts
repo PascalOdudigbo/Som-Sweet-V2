@@ -191,12 +191,11 @@ export type BusinessType = {
   id: number;
   name: string;
   description?: string | null;
-  refundsPolicy?: string | null;
+  policies?:  PolicyType[];
   phone: string;
   email: string;
   address: string;
   socialLinks?: SocialMediaType[];
-  policies?: PolicyType[];
 }
 
 export type SocialMediaType = {
@@ -209,9 +208,8 @@ export type SocialMediaType = {
 
 export type PolicyType = {
   id: number;
-  businessId: number;
-  name: string;
-  business?: BusinessType;
+  title: string;
+  content: string;
 }
 
 export type RefundType = {

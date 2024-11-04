@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Badge, Tooltip } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { IconContext, IconType } from 'react-icons'
@@ -12,6 +12,7 @@ import { RiDiscountPercentFill } from 'react-icons/ri'
 import "./_layout.scss"
 import { Loading, NavBar } from '@/components'
 import { useAuth } from '@/components/contexts/AuthProvider'
+import { DashboardData } from '@/utils/adminDashboardTypes'
 
 interface NavLinkType {
   title: string;
@@ -19,16 +20,6 @@ interface NavLinkType {
   route: string;
   badgeContent: number | string;
 }
-
-const navLinks: NavLinkType[] = [
-  { title: "Dashboard", icon: AiFillDashboard, route: "/admin/dashboard", badgeContent: '!' },
-  { title: "Staff Management", icon: FaClipboardUser, route: "/admin/staff", badgeContent: 0 },
-  { title: "Customers Management", icon: FaUser, route: "/admin/customers", badgeContent: 3 },
-  { title: "Categories Management", icon: MdCategory, route: "/admin/categories", badgeContent: 0 },
-  { title: "Products Management", icon: GiShoppingBag, route: "/admin/products", badgeContent: 0 },
-  { title: "Offers Management", icon: RiDiscountPercentFill, route: "/admin/offers", badgeContent: 0 },
-  { title: "Order Management", icon: FaShippingFast, route: "/admin/orders", badgeContent: 0 },
-];
 
 interface NavLinkProps extends NavLinkType {
   onClick: () => void;
@@ -50,6 +41,106 @@ interface NavigationMenuProps {
 
 const NavigationMenu: React.FC<NavigationMenuProps> = ({ className }) => {
   const navigate = useRouter();
+  // Defining a state variable to hold all the dashboard analytics
+  const [dashboardData, setDashboardData] = useState<DashboardData>({
+    staff: null,
+    customers: null,
+    products: null,
+    offers: null,
+    orders: null,
+    recentActivity: null,
+    salesOverview: null,
+  });
+
+  // State variables for holding error messages
+  const [error, setError] = useState<string | null>(null);
+  const [salesOverviewError, setSalesOverviewError] = useState(false);
+  // State variable to handle data fetch status
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Fetching the dashboard data from the backend
+  const fetchDashboardData = useCallback(async () => {
+    // Setting loading and error status 
+    setIsLoading(true);
+    setError(null);
+    // fetching the required data
+    try {
+      const [
+        staffResponse,
+        customersResponse,
+        productsResponse,
+        offersResponse,
+        ordersResponse,
+        recentActivityResponse,
+        salesOverviewResponse
+      ] = await Promise.all([
+        fetch('/api/admin/dashboard/staff'),
+        fetch('/api/admin/dashboard/customer'),
+        fetch('/api/admin/dashboard/product'),
+        fetch('/api/admin/dashboard/offer'),
+        fetch('/api/admin/dashboard/order'),
+        fetch('/api/admin/dashboard/recentActivity'),
+        fetch('/api/admin/dashboard/salesOverview')
+      ]);
+      // converting the data to json and initializng respective variables
+      const [
+        staff,
+        customers,
+        products,
+        offers,
+        orders,
+        recentActivity,
+        salesOverview
+      ] = await Promise.all([
+        staffResponse.json(),
+        customersResponse.json(),
+        productsResponse.json(),
+        offersResponse.json(),
+        ordersResponse.json(),
+        recentActivityResponse.json(),
+        salesOverviewResponse.json()
+      ]);
+
+      // If the salesOverview fetch encountered an error
+      if (salesOverview.error) {
+        setSalesOverviewError(true);
+      } else {
+        setSalesOverviewError(false);
+      }
+      // setting up the dashboard data
+      setDashboardData({
+        staff,
+        customers,
+        products,
+        offers,
+        orders,
+        recentActivity,
+        salesOverview: Array.isArray(salesOverview) ? salesOverview : [] // ensuring there's a default data for sames overview
+      });
+    } catch (error) {
+      console.error('Failed to fetch dashboard data:', error);
+      // Setting the error to be displayed
+      setError('Failed to load some dashboard data. Please try again or contact support.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Calling the function to get all dashboard data
+    fetchDashboardData();
+  }, [fetchDashboardData]);
+
+
+  const navLinks: NavLinkType[] = [
+    { title: "Dashboard", icon: AiFillDashboard, route: "/admin/dashboard", badgeContent: '!' },
+    { title: "Staff Management", icon: FaClipboardUser, route: "/admin/staff", badgeContent: dashboardData?.staff?.inactiveStaff ?? 0 },
+    { title: "Customers Management", icon: FaUser, route: "/admin/customers", badgeContent: (dashboardData?.customers?.newThisMonth) ?? 0},
+    { title: "Categories Management", icon: MdCategory, route: "/admin/categories", badgeContent: 0 },
+    { title: "Products Management", icon: GiShoppingBag, route: "/admin/products", badgeContent: dashboardData?.products?.inactiveProducts ?? 0 },
+    { title: "Offers Management", icon: RiDiscountPercentFill, route: "/admin/offers", badgeContent: dashboardData?.offers?.expiredOffers ?? 0 },
+    { title: "Order Management", icon: FaShippingFast, route: "/admin/orders", badgeContent: dashboardData?.orders?.pendingOrders ?? 0 },
+  ];
 
   return (
     <section className={className}>
@@ -73,8 +164,8 @@ function Portal({ children }: PortalProps) {
   const { user } = useAuth()
   useEffect(() => { }, [user])
 
-  if(!user){
-    return <Loading/>
+  if (!user) {
+    return <Loading />
   }
 
   if (user?.role?.name?.toLowerCase() !== "administrator") {

@@ -101,7 +101,7 @@ const {setCart} = useCart()
         if (fetchedProduct) {
           setProduct(fetchedProduct);
           setTargetImage(fetchedProduct?.images?.[0]?.imageUrl.toString() ?? "");
-          setBusinessRefundPolicy(testBusiness.refundsPolicy || '');
+          setBusinessRefundPolicy(testBusiness?.policies?.find((policy) => policy.title?.toLowerCase()?.includes("refund"))?.content || '');
         } else {
           // If the product fetched failed
           showToast("error", "Product not found")

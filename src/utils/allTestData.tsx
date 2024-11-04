@@ -251,11 +251,16 @@ export const testStrawberryCake: ProductType = {
     ],
 };
 
+
 export const testBusiness: BusinessType = {
     id: 1,
     name: "Som' Sweet",
     description: "INDULGE IN THE SWEETEST MOMENTS",
-    refundsPolicy: `At Som' Sweet, we take pride in our delicious cakes and pastries. We want you to be completely satisfied with your purchase. However, due to the perishable nature of our products, we have a specific refund policy to ensure fairness and food safety.
+    policies: [
+        {
+            id: 1,
+            title: "Refund Policy",
+            content: `At Som' Sweet, we take pride in our delicious cakes and pastries. We want you to be completely satisfied with your purchase. However, due to the perishable nature of our products, we have a specific refund policy to ensure fairness and food safety.
   
   1. Cancellation and Refunds Before Delivery:
      * You can cancel your order for a full refund up to 24 hours before the scheduled delivery time.
@@ -286,7 +291,104 @@ export const testBusiness: BusinessType = {
   8. Gift Orders:
      * For gift orders, refunds will be issued to the purchaser, not the recipient.
   
-  We're committed to your satisfaction. If you have any questions or concerns about our refund policy, please don't hesitate to contact us.`,
+  We're committed to your satisfaction. If you have any questions or concerns about our refund policy, please don't hesitate to contact us.`
+        },
+        {
+            id: 2,
+            title: "Shipping Policy",
+            content: `Som' Sweet is committed to delivering fresh, high-quality baked goods to our customers.
+
+1. Delivery Area:
+   * We currently deliver within a 20-mile radius of our Glasgow bakery location
+   * Delivery fees are calculated based on distance and order size
+   * Special arrangements may be made for locations outside our standard delivery area
+
+2. Delivery Times:
+   * Standard delivery requires 24-hour advance notice
+   * Same-day delivery available for an additional fee (subject to availability)
+   * Delivery windows are scheduled in 2-hour blocks
+   * Special event deliveries are scheduled with dedicated time slots
+
+3. Shipping Methods:
+   * All deliveries are made using our temperature-controlled vehicles
+   * Special packaging ensures product freshness and presentation
+   * Corporate and bulk orders may require special delivery arrangements
+
+4. Order Tracking:
+   * Real-time tracking available for all deliveries
+   * SMS updates at key delivery milestones
+   * Customer notification 30 minutes before delivery`
+        },
+        {
+            id: 3,
+            title: "Privacy Policy",
+            content: `At Som' Sweet, we respect and protect your privacy.
+
+1. Information Collection:
+   * We collect only essential information for order processing
+   * Payment information is securely processed through Stripe
+   * Contact details are used solely for order communication
+   * Optional marketing communications require explicit consent
+
+2. Data Protection:
+   * All personal data is encrypted and securely stored
+   * We never share your information with third parties for marketing
+   * You can request to view or delete your data at any time
+   * We comply with all GDPR requirements
+
+3. Cookie Policy:
+   * Essential cookies for site functionality
+   * Analytics cookies to improve our service
+   * Marketing cookies are optional
+   * You can manage cookie preferences at any time`
+        },
+        {
+            id: 4,
+            title: "Allergen Policy",
+            content: `Som' Sweet takes food safety seriously and provides clear allergen information.
+
+1. Kitchen Environment:
+   * Our kitchen handles: nuts, gluten, dairy, eggs, and soy
+   * Cross-contamination prevention measures are in place
+   * Dedicated equipment for allergen-free products
+   * Regular staff training on allergen awareness
+
+2. Product Information:
+   * Complete allergen information available for all products
+   * Clear labeling of common allergens
+   * Custom orders can accommodate specific allergies
+   * Ingredient lists available upon request
+
+3. Customer Responsibility:
+   * Please inform us of any allergies when ordering
+   * Discuss severe allergies with our staff directly
+   * Review ingredient lists before consuming
+   * Consider cross-contamination risks`
+        },
+        {
+            id: 5,
+            title: "Custom Order Policy",
+            content: `Create your perfect custom treat with Som' Sweet.
+
+1. Ordering Timeline:
+   * Minimum 72-hour notice for custom orders
+   * Wedding cakes require 4-week minimum notice
+   * Rush orders subject to availability and additional fees
+   * Holiday orders may require extended notice
+
+2. Design Process:
+   * Free initial consultation
+   * Design approval required before production
+   * Changes accepted up to 48 hours before delivery
+   * Sample tastings available for wedding cakes
+
+3. Pricing:
+   * 50% deposit required to confirm order
+   * Final payment due 48 hours before delivery
+   * Custom design fees vary by complexity
+   * Wedding cake pricing includes consultation and tasting`
+        }
+    ],
     phone: "+44793870248",
     email: "info@somsweet.com",
     address: "GL4 5XL, Old Rothman Road, Glasgow",

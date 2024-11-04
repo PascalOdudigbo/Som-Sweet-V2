@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect, useMemo } from 'react'
-import { Loading, Search } from '@/components'
+import { Loading, Pagination, Search } from '@/components'
 import { RefundType, OrderType, UserType } from '@/utils/allModelTypes'
 import { getAllRefunds, approveRefund, denyRefund } from '@/utils/refundManagement'
 import { showToast } from '@/utils/toast'
@@ -25,6 +25,8 @@ function RefundsManagement() {
     options: { size: '30px', className: "dropdown_icon" },
     status: { size: '30px' }
   }), []);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [refundsPerPage] = useState(4)
 
   useEffect(() => {
     fetchRefunds()
@@ -93,6 +95,14 @@ function RefundsManagement() {
   const toggleExpand = (refundId: number) => {
     setExpandedRefundId(expandedRefundId === refundId ? null : refundId)
   }
+
+   // Get current refunds
+   const indexOfLastOrder = currentPage * refundsPerPage
+   const indexOfFirstOrder = indexOfLastOrder - refundsPerPage
+   const currentRefunds = filteredRefunds.slice(indexOfFirstOrder, indexOfLastOrder)
+ 
+   // Change page
+   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
   if (isLoading) {
     return <Loading />
@@ -163,6 +173,13 @@ function RefundsManagement() {
         </tbody>
       </table>
       {filteredRefunds.length === 0 && <p className="no_refunds_text">No refunds found</p>}
+
+      <Pagination
+        itemsPerPage={refundsPerPage}
+        totalItems={filteredRefunds.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </main>
   )
 }
