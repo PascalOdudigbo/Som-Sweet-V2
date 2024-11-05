@@ -9,6 +9,7 @@ import { GiShoppingBag } from 'react-icons/gi'
 import { FaClipboardUser } from 'react-icons/fa6'
 import { MdCategory } from 'react-icons/md'
 import { RiDiscountPercentFill } from 'react-icons/ri'
+import { HiBuildingStorefront } from "react-icons/hi2";
 import "./_layout.scss"
 import { Loading, NavBar } from '@/components'
 import { useAuth } from '@/components/contexts/AuthProvider'
@@ -134,6 +135,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({ className }) => {
 
   const navLinks: NavLinkType[] = [
     { title: "Dashboard", icon: AiFillDashboard, route: "/admin/dashboard", badgeContent: '!' },
+    { title: "Store Management", icon: HiBuildingStorefront, route: "/admin/store", badgeContent: "*"},
     { title: "Staff Management", icon: FaClipboardUser, route: "/admin/staff", badgeContent: dashboardData?.staff?.inactiveStaff ?? 0 },
     { title: "Customers Management", icon: FaUser, route: "/admin/customers", badgeContent: (dashboardData?.customers?.newThisMonth) ?? 0},
     { title: "Categories Management", icon: MdCategory, route: "/admin/categories", badgeContent: 0 },

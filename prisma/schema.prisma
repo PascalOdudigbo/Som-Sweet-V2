@@ -202,33 +202,6 @@ id               Int      @id @default(autoincrement())
   updatedAt        DateTime @updatedAt
 }
 
-model Business {
-  id          Int           @id @default(autoincrement())
-  name        String
-  description String?
-  refundsPolicy String?
-  phone       String
-  email       String
-  address     String
-  socialLinks SocialMedia[]
-  policies    Policy[]
-}
-
-model SocialMedia {
-  id         Int      @id @default(autoincrement())
-  businessId Int
-  name       String
-  url        String
-  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
-}
-
-model Policy {
-  id         Int      @id @default(autoincrement())
-  businessId Int
-  name       String
-  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
-}
-
 model Refund {
   id             Int       @id @default(autoincrement())
   orderId        Int
@@ -252,4 +225,33 @@ model UserWishlist {
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
+}
+
+model Business {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String?
+  phone       String
+  email       String
+  address     String
+  socialLinks SocialMedia[]
+  policies    Policy[]      // Relation to policies remains but structure updated
+}
+
+model Policy {
+  id         Int      @id @default(autoincrement())
+  businessId Int
+  title      String   // Changed from 'name' to 'title' to match the type
+  content    String   // Added content field
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([businessId, title]) // Added unique constraint to prevent duplicate policy types
+}
+
+model SocialMedia {
+  id         Int      @id @default(autoincrement())
+  businessId Int
+  name       String
+  url        String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }

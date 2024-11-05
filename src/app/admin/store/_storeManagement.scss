@@ -1,0 +1,53 @@
+.store_management_wrapper {
+    min-height: 100vh;
+    padding: 2rem;
+
+    .store_management_header {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        h2 {
+            font-size: 1.5em;
+        }
+    }
+
+    .business_and_socials_form_wrapper {
+        display: flex;
+        flex-direction: row;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25px;
+        justify-content: space-between;
+        width: 96%;
+
+        .business_management_form_wrapper {
+            width: 40%;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+            .business_management_form {
+                width: 90%;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                height: max-content;
+            }
+        }
+
+        .socials_management_form_wrapper {
+            width: 40%;
+            max-height: fit-content;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+            .socials_management_form {
+                width: 90%;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                height: max-content;
+            }
+        }
+       
+    }
+}

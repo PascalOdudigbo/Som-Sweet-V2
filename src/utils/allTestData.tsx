@@ -408,8 +408,14 @@ export const testBusiness: BusinessType = {
         {
             id: 3,
             businessId: 1,
-            name: "Twitter",
-            url: "https://www.twitter.com/somsweet"
+            name: "TikTok",
+            url: "https://www.tiktok.com/somsweet"
+        },
+        {
+            id: 3,
+            businessId: 1,
+            name: "Youtube",
+            url: "https://www.youtube.com/somsweet"
         }
     ]
 };

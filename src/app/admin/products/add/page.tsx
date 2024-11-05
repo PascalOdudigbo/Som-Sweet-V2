@@ -155,6 +155,7 @@ function AddProduct() {
               onChangeFunction={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProduct({ ...product, description: e.target.value })}
               rows={5}
               cols={45}
+              maxLength={1020}
             />
             <FormInput
               label='Base Price'

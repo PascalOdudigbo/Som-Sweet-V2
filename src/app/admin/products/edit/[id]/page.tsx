@@ -16,12 +16,14 @@ import './_edit.scss'
 import Variations from '@/app/admin/variations/page'
 
 function EditProduct({ params }: { params: { id: string } }) {
+  // State variables to store and manage dynamic data and form data
   const [product, setProduct] = useState<ProductType | null>(null)
   const [imageFiles, setImageFiles] = useState<File[]>([])
   const [categories, setCategories] = useState<CategoryType[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string | number>("")
   const [isLoading, setIsLoading] = useState(false)
 
+  // Initializing the router and useRef hook variables
   const router = useRouter()
   const uploadImagesRef = useRef<HTMLInputElement>(null)
 
@@ -189,6 +191,7 @@ function EditProduct({ params }: { params: { id: string } }) {
               onChangeFunction={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProduct({ ...product, description: e.target.value })}
               rows={5}
               cols={45}
+              maxLength={1020}
             />
             <FormInput
               label='Base Price'

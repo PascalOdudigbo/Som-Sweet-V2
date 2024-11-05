@@ -142,6 +142,7 @@ function EditOffer({ params }: { params: { id: string } }) {
                             rows={5}
                             cols={45}
                             onChangeFunction={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDiscount({ ...discount, description: e.target.value })}
+                            maxLength={240}
                         />
                         <FormInput
                             label='Discount Percent'

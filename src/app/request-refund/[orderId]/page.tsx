@@ -204,6 +204,7 @@ function RequestRefund({ params }: { params: { orderId: string } }) {
             rows={5}
             cols={50}
             onChangeFunction={(e) => setRefundReason(e.target.value)}
+            maxLength={120}
           />
           <button type='submit' className='submit_button custom_large_button' disabled={isSubmitting}>
             {isSubmitting ? 'Submitting...' : 'Submit Refund Request'}

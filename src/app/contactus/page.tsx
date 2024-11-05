@@ -80,6 +80,7 @@ function ContactUs() {
               rows={5}
               cols={45}
               onChangeFunction={(e) => setContactDetails({ ...contactDetails, message: e.target.value })}
+              maxLength={240}
             />
 
             <button type="submit" className='contactus_button border_button'>SEND MESSAGE</button>

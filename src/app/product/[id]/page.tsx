@@ -215,6 +215,7 @@ const {setCart} = useCart()
               rows={5}
               cols={45}
               onChangeFunction={(e) => { setCustomText(e.target.value) }}
+              maxLength={120}
             />
 
             <button

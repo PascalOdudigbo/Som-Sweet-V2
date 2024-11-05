@@ -190,12 +190,12 @@ export type PaymentType = {
 export type BusinessType = {
   id: number;
   name: string;
-  description?: string | null;
-  policies?:  PolicyType[];
+  description: string | null;
+  policies:  PolicyType[];
   phone: string;
   email: string;
   address: string;
-  socialLinks?: SocialMediaType[];
+  socialLinks: SocialMediaType[];
 }
 
 export type SocialMediaType = {
