@@ -122,3 +122,14 @@ export function validatePolicyContent(content: string): string | null {
   }
   return null;
 }
+
+// A function to search through products
+export function searchPolicies(searchTerm: string, policies: PolicyType[]): PolicyType[] {
+  if (searchTerm === "") {
+    return policies;
+  } else {
+    return policies.filter(policies => 
+      policies.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+}

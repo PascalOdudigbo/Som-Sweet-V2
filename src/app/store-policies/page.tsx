@@ -45,12 +45,12 @@ function StorePolicies() {
 
                 {
                     business?.policies?.map(policy => 
-                    <MinimizableLayout 
+                    <MinimizableLayout
                         key={policy?.id}
                         title={policy?.title.toUpperCase()}
                         isActiveInit={false}
                     >
-                         <pre className='preformatted_text'>{policy?.content}</pre>
+                         <pre id={policy.title.split(" ")[0].toLowerCase()} className='preformatted_text'>{policy?.content}</pre>
 
                     </MinimizableLayout>)
                 }

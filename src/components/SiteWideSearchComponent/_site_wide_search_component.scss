@@ -1,0 +1,178 @@
+.SWSC_wrapper {
+    max-width: 400px;
+    height: 100%;
+
+    .search_section_title {
+        font-size: clamp(14px, 4vw, 24px);
+        font-family: var(--font-questrial);
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .search_item_wrapper {
+        width: 100%;
+        height: max-content;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--color-cerulean);
+        }
+
+        .search_item_image {
+            width: 25%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+
+        .search_item_text {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .search_item_name {
+            font-family: var(--font-inter);
+            color: var(--color-black);
+            font-weight: 800;
+            font-size: clamp(12px, 2.5vw, 16px);
+            margin-bottom: 10px;
+        }
+
+        .search_item_description {
+            font-family: var(--font-questrial);
+            color: var(--color-dark_grey);
+            font-size: clamp(10px, 2vw, 13px);
+            margin-bottom: 10px;
+            flex-grow: 1;
+        }
+
+        .search_item_price {
+            font-family: var(--font-inter);
+            color: var(--color-dark_grey);
+            font-weight: 800;
+            font-size: clamp(12px, 2vw, 15px);
+        }
+    }
+
+    .no_data_text {
+        text-transform: capitalize;
+        color: var(--color-grey);
+        width: 100%;
+        text-align: center;
+        font-size: 2em;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-family: var(--font-inter);
+    }
+
+
+}
+
+// Large Desktop (1440px and up)
+@media screen and (min-width: 1440px) {
+    .SWSC_wrapper {
+
+        max-width: 400px;
+
+        .search_item_wrapper {
+            padding: 10px;
+
+            .search_item_image {
+                width: 20%;
+            }
+
+            .search_item_text {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+        }
+    }
+}
+
+// Desktop (1024px to 1439px)
+@media screen and (max-width: 1439px) {
+    .SWSC_wrapper {
+        max-width: 350px;
+    }
+}
+
+// Tablet Landscape (768px to 1023px)
+@media screen and (max-width: 1023px) {
+    .SWSC_wrapper {
+        max-width: 350px;
+
+        .search_section_title {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .no_data_text {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+// Tablet Portrait (600px to 767px)
+@media screen and (max-width: 767px) {
+    .SWSC_wrapper {
+        max-width: 100%;
+        width: 100%;
+
+        .search_item_wrapper {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+
+            .search_item_image {
+                width: 60px;
+                min-width: 60px;
+            }
+
+            .search_item_text {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        .no_data_text {
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+// Mobile (320px to 599px)
+@media screen and (max-width: 599px) {
+    .search_section_title {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .search_item_wrapper {
+        padding: 5px;
+
+        .search_item_image {
+            width: 50px;
+            min-width: 50px;
+        }
+
+        .search_item_text {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+    }
+
+    .no_data_text {
+        font-size: 1em;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}

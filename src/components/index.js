@@ -31,6 +31,7 @@ export { default as OrderRow } from "./OrderRow/OrderRow";
 export { default as OrderStatusDropdown } from "./OrderStatusDropdown/OrderStatusDropdown";
 export { default as Pagination } from './Pagination/Pagination';
 export { default as PolicyRow } from './PolicyRow/PolicyRow';
+export { default as SiteWideSearchComponent } from './SiteWideSearchComponent/SiteWideSearchComponent';
 
 //Layouts
 export { default as NavChildFooterLayout } from "./Layouts/NavChildrenFooterLayout";

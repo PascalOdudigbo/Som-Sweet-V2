@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { NavDropdown, Search } from '../'
+import { NavDropdown, Search, SiteWideSearchComponent } from '../'
 import "./_navbar.scss"
 import Image from 'next/image'
 import { cartIcon } from "../../assets";
@@ -32,6 +32,10 @@ function NavBar() {
   // Getting the business data from the use business context
   const { business } = useBusiness()
 
+  // Setting up the search data state
+  const [searchTerm, setSearchTerm] = useState<string>("")
+
+
   // Router variable function
   const router = useRouter();
 
@@ -62,18 +66,24 @@ function NavBar() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // An event function
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
+
   return (
     <nav className='nav_main_container'>
       <section className='nav_top_sub_container'>
         <h3 className='nav_site_title' onClick={() => { router.push("/") }}>{business?.name}</h3>
 
         <section className='search_container'>
-          <Search />
-          <section className='search_content'>
+          <Search onSearch={handleSearch} />
 
-          </section>
+          {searchTerm.length > 0 && <section className='search_content'>
+            <SiteWideSearchComponent searchTerm={searchTerm} />
+          </section>}
         </section>
-
 
         <section className='nav_dropdown_cart_container'>
           <NavDropdown user={user} />
@@ -132,10 +142,11 @@ function NavBar() {
 
       <section className={`nav_mobile_links ${mobileMenuOpen ? 'active' : ''}`}>
         <section className='search_container'>
-          <Search />
-          <section className='search_content'>
+          <Search onSearch={handleSearch} />
 
-          </section>
+          {searchTerm.length > 0 && <section className='search_content'>
+            <SiteWideSearchComponent searchTerm={searchTerm} />
+          </section>}
         </section>
 
         {navLinks.map((link) => (
