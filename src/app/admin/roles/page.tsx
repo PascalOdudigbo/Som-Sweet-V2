@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { RoleRow } from '@/components'
+import { Pagination, RoleRow } from '@/components'
 import { RoleType } from '@/utils/allModelTypes';
 import { getAllRoles, createRole, updateRole } from '@/utils/roleManagement';
 import { showToast } from '@/utils/toast'
@@ -12,6 +12,8 @@ function RoleManagement() {
     const [roles, setRoles] = useState<RoleType[]>([]);
     const [newRoleName, setNewRoleName] = useState('');
     const [editingRole, setEditingRole] = useState<RoleType | null>(null);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [rolesPerPage] = useState(4)
 
     useEffect(() => {
         // Getting the roles data
@@ -74,6 +76,15 @@ function RoleManagement() {
         }
     };
 
+        // Get current roles
+        const indexOfLastRole = currentPage * rolesPerPage
+        const indexOfFirstRole = indexOfLastRole - rolesPerPage
+        const currentRoles = roles.slice(indexOfFirstRole, indexOfLastRole)
+    
+        // Change page
+        const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+    
+
     return (
         <div className='role_management_wrapper'>
             <h3 className='section_subtitle section_title'>Role Management</h3>
@@ -95,7 +106,7 @@ function RoleManagement() {
                     </tr>
                 </thead>
                 <tbody className='table_body'>
-                    {roles.map((role) => (
+                    {currentRoles.map((role) => (
                         <RoleRow
                             key={role.id}
                             role={role}
@@ -107,6 +118,13 @@ function RoleManagement() {
                     ))}
                 </tbody>
             </table>
+
+            <Pagination
+                itemsPerPage={rolesPerPage}
+                totalItems={roles.length}
+                paginate={paginate}
+                currentPage={currentPage}
+            />
         </div>
     )
 }

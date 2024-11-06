@@ -33,9 +33,7 @@
         width: 95%;
         overflow-y: scroll;
     }
-    .sub_pages_wrapper::-webkit-scrollbar{
-        display: none;
-    }
+    
 
 
     .portal_navigation_menu_mobile {
@@ -58,6 +56,10 @@
             }
         }
     }
+}
+
+.sub_pages_wrapper::-webkit-scrollbar{
+  display: none;
 }
 
 

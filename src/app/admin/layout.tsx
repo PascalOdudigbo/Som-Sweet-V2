@@ -135,7 +135,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({ className }) => {
 
   const navLinks: NavLinkType[] = [
     { title: "Dashboard", icon: AiFillDashboard, route: "/admin/dashboard", badgeContent: '!' },
-    { title: "Store Management", icon: HiBuildingStorefront, route: "/admin/store", badgeContent: "*"},
+    { title: "Store Management", icon: HiBuildingStorefront, route: "/admin/store-management", badgeContent: "*"},
     { title: "Staff Management", icon: FaClipboardUser, route: "/admin/staff", badgeContent: dashboardData?.staff?.inactiveStaff ?? 0 },
     { title: "Customers Management", icon: FaUser, route: "/admin/customers", badgeContent: (dashboardData?.customers?.newThisMonth) ?? 0},
     { title: "Categories Management", icon: MdCategory, route: "/admin/categories", badgeContent: 0 },

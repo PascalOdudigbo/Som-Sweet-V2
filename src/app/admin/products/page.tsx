@@ -49,7 +49,7 @@ function Products() {
         setSearchTerm(term);
     };
 
-    // Get current orders
+    // Get current products
     const indexOfLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)

@@ -1,16 +1,21 @@
+'use client'
 import { Loading, MinimizableLayout, NavChildFooterLayout } from '@/components'
 import Image from 'next/image'
 import React from 'react'
 import { testBusiness } from '@/utils/allTestData'
 import { policiesBg } from '@/assets'
 import "./_storePolicies.scss"
+import { useBusiness } from '@/components/contexts/BusinessProvider'
 
 function StorePolicies() {
-    if (!testBusiness?.policies) {
+    // getting the business data from the business context provider
+    const {business} = useBusiness()
+
+    if (!business?.policies) {
         return <Loading />
     }
 
-    if (testBusiness?.policies?.length === 0) {
+    if (business?.policies?.length === 0) {
         return (
             <NavChildFooterLayout>
                 <main className='policies_main_container page_container'>
@@ -39,7 +44,7 @@ function StorePolicies() {
                 </div>
 
                 {
-                    testBusiness?.policies?.map(policy => 
+                    business?.policies?.map(policy => 
                     <MinimizableLayout 
                         key={policy?.id}
                         title={policy?.title.toUpperCase()}

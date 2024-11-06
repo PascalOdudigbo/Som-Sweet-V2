@@ -1,8 +1,12 @@
+'use client'
 import React from 'react'
 import "./_footer.scss"
 import Link from 'next/link'
+import { useBusiness } from '../contexts/BusinessProvider'
 
 function Footer() {
+  // Getting the business data from the context provider
+  const {business} = useBusiness()
   return (
     <div className='footer_main_container flex_column_center'>
       <section className='footer_sub_container flex_row_center'>
@@ -23,16 +27,15 @@ function Footer() {
         <section className='footer_contact_container'>
           <section className='footer_section_text_container'>
             <h1 className='footer_section_title playfair_shadow_title'>PHONE</h1>
-            <p className='footer_phone'>+44793870248</p>
+            <p className='footer_phone'>{business?.phone.toUpperCase()}</p>
           </section>
 
           <section className='footer_section_text_container'>
             <h1 className='footer_section_title playfair_shadow_title'>OUR LOCATION</h1>
-            <Link className='footer_location' href="/#contactus">GL4 5XL, Old Rothman Road, Glasgow</Link>
+            <Link className='footer_location' href="/#contactus">{business?.address}</Link>
           </section>
 
         </section>
-
       </section>
       <p className='footer_copyright'>Copyright © {new Date().getFullYear()} MakkTek ltd</p>
 

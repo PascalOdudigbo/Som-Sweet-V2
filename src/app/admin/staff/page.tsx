@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { StaffRow, Search, Loading } from '@/components'
+import { StaffRow, Search, Loading, Pagination } from '@/components'
 import Link from 'next/link'
 import { UserType } from '@/utils/allModelTypes';
 import { getAllStaff } from '@/utils/staffManagement';
@@ -14,6 +14,8 @@ function StaffManagement() {
     const [filteredStaff, setFilteredStaff] = useState<UserType[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [staffPerPage, setStaffPerPage] = useState(4);
 
     useEffect(() => {
         // A function to get the staff data
@@ -39,7 +41,7 @@ function StaffManagement() {
 
     useEffect(() => {
         // A useEffect to handle staff search functionality through staff and searchTerm dependencies 
-        const filtered = staff.filter(member => 
+        const filtered = staff.filter(member =>
             member.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
             member.email.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -53,8 +55,16 @@ function StaffManagement() {
 
     // Display the loading component if the data is being fetched
     if (isLoading) {
-        return <Loading/>;
+        return <Loading />;
     }
+
+    // Get current staff to display
+    const indexOfLastStaff = currentPage * staffPerPage
+    const indexOfFirstStaff = indexOfLastStaff - staffPerPage
+    const currentStaffs = filteredStaff.slice(indexOfFirstStaff, indexOfLastStaff)
+
+    // Change page
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
     return (
         <div className='staff_management_wrapper'>
@@ -80,7 +90,7 @@ function StaffManagement() {
                 </thead>
 
                 <tbody className='table_body'>
-                    {filteredStaff.map((staffMember) => (
+                    {currentStaffs.map((staffMember) => (
                         <StaffRow
                             key={staffMember.id}
                             staff={staffMember}
@@ -91,6 +101,13 @@ function StaffManagement() {
             </table>
 
             {filteredStaff.length < 1 && <h3 className="p__inter no_staff_text">NO STAFF FOUND</h3>}
+
+            <Pagination
+                itemsPerPage={staffPerPage}
+                totalItems={filteredStaff.length}
+                paginate={paginate}
+                currentPage={currentPage}
+            />
         </div>
     )
 }

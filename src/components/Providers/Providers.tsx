@@ -1,6 +1,7 @@
 'use client';
 
 import { AuthProvider } from "../contexts/AuthProvider";
+import { BusinessProvider } from "../contexts/BusinessProvider";
 import { CartProvider } from "../contexts/CartProvider";
 import ToastProvider from "../ToastProvider/ToastProvider";
 
@@ -10,13 +11,15 @@ interface ProvidersProps {
 
 function Providers({ children }: ProvidersProps) {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
-      </CartProvider>
-    </AuthProvider>
+    <BusinessProvider>
+      <AuthProvider>
+        <CartProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </CartProvider>
+      </AuthProvider>
+    </BusinessProvider>
   );
 }
 

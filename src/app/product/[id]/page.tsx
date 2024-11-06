@@ -12,6 +12,7 @@ import { showToast } from '@/utils/toast'
 import { addToCart } from '@/utils/cartManagement'
 import { useAuth } from '@/hooks/useAuth'
 import { useCart } from '@/components/contexts/CartProvider'
+import { useBusiness } from '@/components/contexts/BusinessProvider'
 
 // Defining the product image props type
 interface ProductImageProps {
@@ -84,7 +85,8 @@ function Product() {
   const [quantity, setQuantity] = useState<number>(1)
   const [customText, setCustomText] = useState<string>("")
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
-
+   //  Getting the business data from the business context provider
+   const {business} = useBusiness()
 
   // Defining the router variable function
   const router = useRouter();
@@ -241,7 +243,7 @@ const {setCart} = useCart()
 
 
               <MinimizableLayout isActiveInit={false} title='Refund policy'>
-                <pre className='preformatted_text'>{businessRefundPolicy}</pre>
+                <pre className='preformatted_text'>{business?.policies.find(policy => policy.title.toLowerCase().includes("refund"))?.content}</pre>
               </MinimizableLayout>
             </section>
 

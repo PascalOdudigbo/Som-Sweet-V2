@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '../contexts/AuthProvider'
 import { useCart } from '../contexts/CartProvider'
+import { useBusiness } from '../contexts/BusinessProvider'
 
 
 // Defining the NavLinks
@@ -18,22 +19,18 @@ const navLinks = [
   { name: 'ABOUT US', href: '/#aboutus' },
   { name: 'CONTACT US', href: '/#contactus' },
 ];
-// Defining Temporary Socials Links
-const socialLinks = [
-  { name: 'INSTAGRAM', href: '/instagram' },
-  { name: 'FACEBOOK', href: '/facebook' },
-  { name: 'TIKTOK', href: '/tiktok' },
-  { name: 'YOUTUBE', href: '/youtube' },
-];
 
 function NavBar() {
   // Getting the path name
   const pathname = usePathname();
   const [currentHash, setCurrentHash] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // getting the user data from the useAuth hook
+  // getting the user data from the useAuth context
   const { user } = useAuth()
+  // getting thr cart data from the useCart context
   const { cart } = useCart()
+  // Getting the business data from the use business context
+  const { business } = useBusiness()
 
   // Router variable function
   const router = useRouter();
@@ -68,7 +65,7 @@ function NavBar() {
   return (
     <nav className='nav_main_container'>
       <section className='nav_top_sub_container'>
-        <h3 className='nav_site_title' onClick={() => { router.push("/") }}>{"Som' Sweet"}</h3>
+        <h3 className='nav_site_title' onClick={() => { router.push("/") }}>{business?.name}</h3>
 
         <section className='search_container'>
           <Search />
@@ -115,19 +112,19 @@ function NavBar() {
         </section>
 
         <section className='nav_socials_container'>
-          {socialLinks.map((link) => (
+          {business?.socialLinks.map((link) => (
             <Link
-              key={link.name}
-              href={link.href}
+              key={link.id}
+              href={link.url}
               className={clsx(
                 'nav_socials_link',
                 {
-                  'active_link': isLinkActive(link.href),
+                  'active_link': isLinkActive(link.url),
                 }
               )}
               onClick={() => setMobileMenuOpen(false)}
             >
-              {link.name}
+              {link.name.toUpperCase()}
             </Link>
           ))}
         </section>
@@ -141,7 +138,7 @@ function NavBar() {
           </section>
         </section>
 
-        {navLinks.concat(socialLinks).map((link) => (
+        {navLinks.map((link) => (
           <Link
             key={link.name}
             href={link.href}
@@ -154,6 +151,22 @@ function NavBar() {
             onClick={() => setMobileMenuOpen(false)}
           >
             {link.name}
+          </Link>
+        ))}
+
+        {business?.socialLinks.map((link) => (
+          <Link
+            key={link.id}
+            href={link.url}
+            className={clsx(
+              'nav_page_link',
+              {
+                'active_link': isLinkActive(link.url),
+              }
+            )}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {link.name.toUpperCase()}
           </Link>
         ))}
       </section>
