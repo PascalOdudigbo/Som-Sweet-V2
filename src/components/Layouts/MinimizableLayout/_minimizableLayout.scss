@@ -8,7 +8,7 @@
 
         .layout_title {
             font-family: var(--font-questrial);
-            font-size: 20px;
+            font-size: clamp(16px, 2.5vw, 18px);
             margin-bottom: 10px;
             text-align: left;
             height: 25px;
@@ -19,7 +19,7 @@
             height: 25px;
             object-fit: contain;
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }
@@ -40,18 +40,18 @@
         max-height: 500px;
         text-align: left;
         overflow-y: scroll;
-       
+
     }
 
-    .preformatted_text{
+    .preformatted_text {
         font-family: var(--font-questrial);
-        font-size: clamp(12px, 2.5vw, 18px);
+        font-size: clamp(14px, 2.5vw, 16px);
         width: 100%;
         margin-bottom: 20px;
         white-space: pre-wrap;
         overflow-wrap: break-word;
         word-wrap: break-word;
-        max-width: 100%;   
+        max-width: 100%;
     }
 
 
