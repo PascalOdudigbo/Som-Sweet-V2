@@ -1,6 +1,6 @@
 .SWSC_wrapper {
     max-width: 400px;
-    height: 100%;
+    height: fit-content;
     padding: 5px;
 
     .search_section_title {
@@ -72,6 +72,29 @@
 
 
 }
+
+.loading_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 280px;
+    width: 280px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    .loading_spinner {
+      font-size: 3rem;
+      color: var(--color-cerulean); 
+      animation: spin 1s linear infinite;
+    }
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
 // Large Desktop (1440px and up)
 @media screen and (min-width: 1440px) {

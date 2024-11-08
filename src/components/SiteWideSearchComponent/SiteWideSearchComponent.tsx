@@ -9,6 +9,8 @@ import { showToast } from '@/utils/toast'
 import { searchPolicies } from '@/utils/policyManagement'
 import { policiesBg } from '@/assets'
 import "./_site_wide_search_component.scss"
+import { IconContext } from 'react-icons'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 interface PolicyItemProps {
     policy: PolicyType;
@@ -83,6 +85,17 @@ interface SiteWideSearchComponentProps {
     searchTerm: string;
 }
 
+const Loading: React.FC = () => {
+
+    return (
+        <div className='loading_container'>
+            <IconContext.Provider value={{ className: 'loading_spinner' }}>
+                <AiOutlineLoading3Quarters />
+            </IconContext.Provider>
+        </div>
+    )
+}
+
 function SiteWideSearchComponent({ searchTerm }: SiteWideSearchComponentProps) {
     const router = useRouter();
     const { business } = useBusiness();
@@ -93,6 +106,7 @@ function SiteWideSearchComponent({ searchTerm }: SiteWideSearchComponentProps) {
     );
 
     useEffect(() => {
+        // A function to handle fetching the products
         const fetchData = async () => {
             try {
                 const fetchedProducts = await getAllProducts();
@@ -107,17 +121,21 @@ function SiteWideSearchComponent({ searchTerm }: SiteWideSearchComponentProps) {
         fetchData();
     }, []);
 
+    // UseEffect to handle searching products
     useEffect(() => {
         const filtered = searchProducts(searchTerm, products);
         setFilteredProducts(filtered);
     }, [searchTerm, products]);
 
+    // UseEffect to handle searching policies
     useEffect(() => {
         const filtered = searchPolicies(searchTerm, business?.policies || []);
         setFilteredPolicies(filtered);
     }, [searchTerm, business?.policies]);
 
     return (
+        // showing the loading component when the products data hasn't been fetched yet
+        (products.length <= 0 && searchTerm.length > 0) ? <Loading/> :
         <main className='SWSC_wrapper'>
             {filteredProducts?.length > 0 && <p className='search_section_title'>Treats</p>}
             {filteredProducts.map(product => (

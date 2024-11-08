@@ -35,7 +35,7 @@ function MinimizableLayout({title, isActiveInit, children}: MinimizableLayoutPro
   return (
     <div className='minimizable_section_container flex_column_center'>
         <section className='layout_title_and_icon_wrapper flex_row_center'>
-            <p className='layout_title'>{title}</p>
+            <p className='layout_title'  onClick={()=> setIsActive(prev => !prev)}>{title}</p>
             <Image className='layout_icon' src={variableIconImage} alt={variableAltAndTitle} title={variableAltAndTitle} onClick={()=> setIsActive(prev => !prev)}/>
         </section>
 
