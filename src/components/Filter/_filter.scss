@@ -1,0 +1,105 @@
+.filter_container {
+    width: 300px;
+    padding: 1rem;
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    position: absolute;
+    margin-left: -290px;
+    margin-top: 35px;
+  
+    .filter_title {
+      font-family: var(--font-questrial);
+      font-size: clamp(18px, 2.5vw, 20px);
+      margin-bottom: 25px;
+      color: var(--color-black);
+    }
+  
+    .filter_section {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-grey);
+  
+      &:last-of-type {
+        border-bottom: none;
+      }
+  
+      .filter_section_title {
+        font-family: var(--font-questrial);
+        font-size: clamp(16px, 2.5vw, 18px);
+        margin-bottom: 1rem;
+        color: var(--color-cerulean);
+      }
+  
+      .categories_list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .checkbox_container {
+            margin-top: 10px;
+            border-top: none;
+            font-family: var(--font-inter);
+            height: 20px;
+            width: max-content;
+        
+            .checkbox_label {
+                font-size: clamp(14px, 2.5vw, 16px);
+                font-weight: 400;
+            }
+        }
+      }
+  
+      .price_range_inputs {
+        display: flex;
+        gap: 1rem;
+        
+        .price_input_group {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+  
+          label {
+            font-family: var(--font-openSans);
+            font-size: 0.9rem;
+            color: var(--color-black);
+          }
+  
+          input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--color-grey);
+            border-radius: 4px;
+            font-family: var(--font-openSans);
+  
+            &:focus {
+              outline: none;
+              border-color: var(--color-cerulean);
+            }
+          }
+        }
+      }
+    }
+  
+    .clear_filters_button {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  }
+  
+  // Responsive Design
+  @media screen and (max-width: 768px) {
+    .filter_container {
+        width: 250px;
+        margin-left: -240px;
+      padding: 0.8rem;
+  
+      .filter_section {
+        .price_range_inputs {
+          flex-direction: column;
+        }
+      }
+    }
+  }

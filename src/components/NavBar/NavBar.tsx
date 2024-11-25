@@ -97,7 +97,7 @@ function NavBar() {
           }
 
           <div className='nav_mobile_menu' onClick={toggleMobileMenu}>
-            ☰
+            {mobileMenuOpen ? '\u2715' : '\u2630'}
           </div>
         </section>
       </section>

@@ -17,17 +17,22 @@
         .section_title_dropdown_container {
             width: 100%;
             justify-content: space-between;
-            // align-items: center;
             margin-bottom: 20px;
             flex-wrap: wrap;
 
+            .filter_wrapper{
+                position: relative;
+                z-index: 10;
 
-            .filter_icon {
-                width: 30px;
-                height: 30px;
-                border: 1px solid var(--color-black);
-                cursor: pointer;
+                .filter_icon {
+                    width: 30px;
+                    height: 30px;
+                    border: 1px solid var(--color-black);
+                    cursor: pointer;
+                    align-self: end;;
+                }
             }
+           
         }
 
         .search_wrapper {
@@ -47,6 +52,7 @@
             width: 100%;
             display: grid;
             gap: 30px;
+            
         }
     }
 }

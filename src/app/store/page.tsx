@@ -9,6 +9,7 @@ import { getAllProducts, searchProducts } from '@/utils/productsManagement'
 import { getAllCategories } from '@/utils/categoryManagement'
 import { showToast } from '@/utils/toast'
 import { getAllDiscounts } from '@/utils/discountManagement'
+import Filter from '@/components/Filter/Filter'
 
 function Store() {
   // Setting up the state variables for data and process status management
@@ -21,6 +22,30 @@ function Store() {
   const [viewAllCategories, setViewAllCategories] = useState<boolean>(false)
   const [targetCategory, setTargetCategory] = useState<CategoryType | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
+  const [showFilter, setShowFilter] = useState(false);
+
+  useEffect(() => {
+    // Filter the products based on selected filters
+    const filteredProducts = products.filter(product => {
+      // Category filter
+      const passesCategory = selectedCategories.length === 0 ||
+        selectedCategories.includes(product.categoryId);
+
+      // Price filter
+      const passesPrice = (priceRange.min === 0 || product.basePrice >= priceRange.min) &&
+        (priceRange.max === 0 || product.basePrice <= priceRange.max);
+
+
+      return passesCategory && passesPrice;
+    });
+
+    setFilteredProducts(filteredProducts)
+
+  }, [selectedCategories, priceRange])
+
 
   useEffect(() => {
     // A function to handle fetching all required data for the page
@@ -56,6 +81,7 @@ function Store() {
     const filtered = searchProducts(searchTerm, products);
     setFilteredProducts(filtered);
   }, [searchTerm, products]);
+
 
   useEffect(() => {
     // Handling product filter through category
@@ -112,9 +138,19 @@ function Store() {
         </section>
 
         <section id='products' className='shop_products_container flex_column_center'>
-          <div className='section_title_dropdown_container flex_row_center'>
+          <div className='section_title_dropdown_container flex_row'>
             <h1 className='section_title'>EXPLORE OUR TASTY TREATS</h1>
-            <Image className='filter_icon' src={filterIcon} alt='filter icon' title='Filter' />
+            <section className='flex_column filter_wrapper'>
+              <Image className='filter_icon' src={filterIcon} alt='filter icon' title='Filter' onClick={()=>{setShowFilter(prev => !prev)}} />
+              {showFilter && <Filter
+                categories={categories}
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+              />}
+            </section>
+
           </div>
 
           <div className="search_wrapper">

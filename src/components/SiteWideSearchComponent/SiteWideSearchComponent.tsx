@@ -88,7 +88,7 @@ interface SiteWideSearchComponentProps {
 const Loading: React.FC = () => {
 
     return (
-        <div className='loading_container'>
+        <div className='SWS_loading_container'>
             <IconContext.Provider value={{ className: 'loading_spinner' }}>
                 <AiOutlineLoading3Quarters />
             </IconContext.Provider>
